@@ -12,7 +12,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  retrieveUser(user: User):Observable<User> {
+  loginUser(user: User):Observable<User> {
     return this.http.post<User>(this.url + "login.user", user);
+  }
+
+  signUpUser(user: User):Observable<User> {
+    return this.http.post<User>(this.url + "signup.user", user);
   }
 }
