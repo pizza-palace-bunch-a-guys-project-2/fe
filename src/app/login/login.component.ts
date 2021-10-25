@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(private userServ:UserService) { }
 
   loginUser(loginGroup: FormGroup) {
-    const userName = loginGroup.get('userName')!.value;
-    const userPassword = loginGroup.get('userPassword')!.value;
+    const userName:string = loginGroup.get('userName')!.value;
+    const userPassword:string = loginGroup.get('userPassword')!.value;
     if(userName) {
       console.log('Form input field username has value: ', userName);
     }
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     const user = new User(userName, userPassword);
 
-    this.userServ.retrieveUser(user).subscribe(
+    this.userServ.loginUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
       }
