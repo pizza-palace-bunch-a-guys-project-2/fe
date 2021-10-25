@@ -1,0 +1,19 @@
+<div>
+    <div>
+        Ads/Featured Items
+    </div>
+    <div>
+        <div>
+            Image Caresoul
+        </div>
+        <form [formGroup] = "loginGroup">
+            <h2>Username</h2>
+            <input type="text" formControlName="userName">
+            <h2>Password</h2>
+            <input type="password" formControlName="userPassword">
+            <button class="btn btn-primary" (click)="loginUser(loginGroup)">Login</button>
+        </form>
+        <a routerLink="/register">Register a new account.</a>
+    </div>
+</div>
+
