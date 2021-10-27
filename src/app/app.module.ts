@@ -9,12 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
+import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ImageCarouselComponent
   ],
   imports: [
     BrowserModule,
