@@ -15,10 +15,15 @@ export class RegisterComponent implements OnInit {
     userPassword: new FormControl(''),
     userEmail: new FormControl(''),
     userFirstName: new FormControl(''),
-    userLastName: new FormControl('')
+    userLastName: new FormControl(''),
+    userAddress: new FormControl(''),
+    userCity: new FormControl(''),
+    userState: new FormControl(''),
+    userZip: new FormControl('')
   });
 
   constructor(private userServ:UserService) { }
+
 
   signUpUser(signUpGroup: FormGroup) {
     const userName:string = signUpGroup.get('userName')!.value;
@@ -26,6 +31,10 @@ export class RegisterComponent implements OnInit {
     const userEmail:string = signUpGroup.get('userEmail')!.value;
     const userFirstName:string = signUpGroup.get('userFirstName')!.value;
     const userLastName:string = signUpGroup.get('userLastName')!.value;
+    const userAddress:string = signUpGroup.get('userAddress')!.value;
+    const userCity:string = signUpGroup.get('userCity')!.value;
+    const userState:string = signUpGroup.get('userState')!.value;
+    const userZip:number = signUpGroup.get('userZip')!.value;
     const userRoleId:number = 1;
 
     const user = new User(userName, userPassword, userEmail, userFirstName, userLastName, userRoleId);

@@ -1,16 +1,93 @@
-<div>
-    <form [formGroup] = "signUpGroup">
-        <h2>Username</h2>
-        <input type="text" formControlName="userName">
-        <h2>Password</h2>
-        <input type="password" formControlName="userPassword">
-        <h2>Email</h2>
-        <input type="email" formControlName="userEmail">
-        <h2>First name</h2>
-        <input type="text" formControlName="userFirstName">
-        <h2>Last name</h2>
-        <input type="text" formControlName="userLastName">
-        <button class="btn btn-primary" (click)="signUpUser(signUpGroup)">Sign Up</button>
-    </form>
-</div>
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img
+                  src="assets/img/sign_up_pic.jpg"
+                  alt="Sample photo"
+                  class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 65%; margin-top: 10%; margin-left:4%"
+                />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">User registration form</h3>
+                  <form [formGroup] = "signUpGroup">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" id="userFirstName" class="form-control form-control-lg" formControlName="userFirstName"/>
+                            <label class="form-label" for="userFirstName">First name</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" id="userLastName" class="form-control form-control-lg" formControlName="userLastName"/>
+                            <label class="form-label" for="userLastName">Last name</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" id="userName" class="form-control form-control-lg" formControlName="userName"/>
+                            <label class="form-label" for="userName">User name</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="password" id="userPassword" class="form-control form-control-lg" formControlName="userPassword"/>
+                            <label class="form-label" for="userPassword">Password</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="email" id="userEmail" class="form-control form-control-lg" formControlName="userEmail"/>
+                        <label class="form-label" for="userEmail">Email</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="userAddress" class="form-control form-control-lg" formControlName="userAddress"/>
+                        <label class="form-label" for="userAddress">Address</label>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" id="userCity" class="form-control form-control-lg" formControlName="userCity"/>
+                            <label class="form-label" for="userCity">City</label>
+                          </div>
+                        </div>
+                        <div class="col-md-2 mb-4">
+                          <div class="form-outline">
+                            <input type="text" id="userState" class="form-control form-control-lg" formControlName="userState"/>
+                            <label class="form-label" for="userState">State</label>
+                          </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="form-outline">
+                              <input type="text" id="userZip" class="form-control form-control-lg" formControlName="userZip"/>
+                              <label class="form-label" for="userZip">Zip Code</label>
+                            </div>
+                          </div>
+                      </div>
+      
+                      <div class="d-flex justify-content-center pt-3">
+                        <button type="button" class="btn btn-primary btn-lg ms-2" (click)="signUpUser(signUpGroup)">Sign Up</button>
+                        <button type="button" class="btn btn-secondary btn-lg ms-2" routerLink="/login">To Login</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
  
