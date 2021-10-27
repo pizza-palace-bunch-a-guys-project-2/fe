@@ -1,1 +1,10 @@
 
+.btn btn-lg btn-outline-danger{
+  display: flex;
+  float: right;
+}
+
+
+input[type="file"] {
+  visibility: hidden;
+}

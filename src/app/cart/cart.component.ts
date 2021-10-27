@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,8 +11,11 @@ export class CartComponent implements OnInit {
 
   closeResult: string = '';
 
+  items: any;
 
-  constructor(private modalService: NgbModal) { }
+
+
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder) { }
 
 
   open(content:any) {
@@ -34,6 +38,18 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+//*********** */
+  addToCheckout() {
+    // proccess cart data here and move to checkout
+    // this.items = this.cartService.cleartCart();
+    // this.cartForm.reset();
+  }
+
+  removeCartItem(item: any) {
+    console.log(item);
+    this.items.splice(item, 1);
+    console.log('item was removed');
   }
 }
 

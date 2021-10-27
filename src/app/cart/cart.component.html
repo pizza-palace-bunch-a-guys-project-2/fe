@@ -1,6 +1,6 @@
 <!-- <h1>CART MODAL</h1> -->
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Cart</button>
+<button class="btn btn-lg btn-outline-danger" (click)="open(mymodal)">Cart</button>
 
 <ng-template #mymodal let-modal>
   <div class="modal-header">
@@ -9,10 +9,55 @@
       <span aria-hidden="true">×</span>
     </button>
   </div>
-  <div class="modal-body">
+  <!-- <div class="modal-body">
     Create table for food items here -- link with service/submit on click
+  </div> -->
+
+  <div class="list-group-item cart-align">
+    <table class="table caption-top">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Amount</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; let i = index;">
+          <td>{{ item.name }}</td>
+          <td>
+             <input class= "product-quantity" type="number" value="1" min="1">
+          </td>
+          <td>{{ item.price | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td><button (click)="removeCartItem(i)" class="btn btn-danger btn-sm">Remove</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="addToCheckout.length == 0">Cart is empty.</div>
+
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button routerLink="/checkout" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Checkout</button>
   </div>
 </ng-template>
+
+
+<!-- S3 IMAGE UPLOADING TESTING FUNCTIONALITY - NEEDS TO UPLOAD INITIALLY TO MENU -->
+
+<!-- <div>
+  <button type="submit" (click)="localRef.click()">Pick Image</button>
+  <input type="file" #localRef>
+</div> -->
+
+
+<!-- S3 USE THIS DISREGARD ABOVE COMMENTED OUT-->
+<!-- <h1>Upload,View & Delete File</h1>
+<input type="file" id="customFile" (change)="selectFile($event)" placeholder="File To Upload">
+<button class="btn btn-primary" [disabled]="!selectedFiles || admincheck || status" (click)="upload()">Save File</button>
+<br><br><br>
+<input type="text" placeholder="File to View or Delete"  name="image" [(ngModel)]="file">
+<button class="btn btn-primary" style="margin-left: 10px" (click)="viewFile()">View File</button>
+<button class="btn btn-primary" style="margin-left: 10px" (click)="deleteFile()">Delete File</button> -->
