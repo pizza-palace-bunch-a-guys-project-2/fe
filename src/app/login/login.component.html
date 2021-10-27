@@ -1,24 +1,37 @@
-<div class="container">
-    <div class="container">
-        <app-image-carousel></app-image-carousel>
-    </div>
-    <div class="container w-50">
-        <form  [formGroup] = "loginGroup">
-            <div class="form-group w-50 text-center">
-              <label for="userName">Username</label>
-              <input type="text" class="form-control" placeholder="Enter User Name" formControlName="userName">
-            </div>
-            <div class="form-group w-50 text-center">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" placeholder="Password" formControlName="userName">
-            </div>
-            <div class="container d-flex">
-                <button class="btn btn-primary" (click)="loginUser(loginGroup)">Login</button>
-                <a routerLink="/register">Register a new account.</a>
-            </div>
-        </form>
-    </div>
-</div>
+<section class="vh-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-5 mt-md-4 pb-5">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <p class="text-white-50 mb-5">Please enter your user name and password!</p>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="email" id="userName" class="form-control form-control-lg" formControlName="userName"/>
+                  <label class="form-label" for="userName">User name</label>
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="userPassword" class="form-control form-control-lg" formControlName="userPassword"/>
+                  <label class="form-label" for="userPassword">Password</label>
+                </div>
+  
+                <button class="btn btn-primary btn-lg px-5" type="button" (click)="loginUser(loginGroup)">Login</button>
 
-
+              </div>
+  
+              <div>
+                <p class="mb-0">Don't have an account? <a routerLink="/register" class="text-blue-50 fw-bold">Sign Up</a></p>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
