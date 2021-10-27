@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../services/user';
 import { UserService } from '../services/user.service';
 
@@ -10,12 +10,23 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginGroup = new FormGroup({
-    userName: new FormControl(''),
-    userPassword: new FormControl('')
+ public loginGroup = new FormGroup({
+    userName: new FormControl('', [Validators.required]),
+    userPassword: new FormControl('', [Validators.required])
   });
 
-  constructor(private userServ:UserService) { }
+  public isInvalidLogin:boolean = false;
+
+  constructor(private userServ:UserService) {}
+
+  get name() {
+    return this.loginGroup.get('userName')!;
+  }
+
+  get password() {
+    return this.loginGroup.get('userPassword')!;
+  }
+
 
   loginUser(loginGroup: FormGroup) {
     const userName:string = loginGroup.get('userName')!.value;
@@ -33,9 +44,16 @@ export class LoginComponent implements OnInit {
     this.userServ.loginUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
+        if (resp === null) {
+          this.isInvalidLogin = true;
+        } else {
+          this.isInvalidLogin = false;
+        }
       }
     );
   }
+
+
 
   ngOnInit(): void {
   }
