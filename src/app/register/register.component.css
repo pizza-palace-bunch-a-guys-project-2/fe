@@ -1,0 +1,13 @@
+.register-section {
+    background-image: url('../../assets/img/login_pic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.register-image {
+    border-radius: .25rem;
+    height: 65%;
+    margin-top: 10%;
+    margin-left:4%;
+}
