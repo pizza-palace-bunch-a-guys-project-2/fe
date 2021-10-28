@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 //import { Item, Data } from './Iitem';
-import { MenuItemService } from '../menu-item.service';
+import { MenuItemService } from '../services/menu-item.service';
 
 
 @Component({

@@ -8,13 +8,9 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './services/user.service';
 import { CartComponent } from './cart/cart.component';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
@@ -22,8 +18,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AppComponent,
     MenuComponent,
     MenuItemComponent,
-    LoginComponent,
-    RegisterComponent,
     CartComponent,
     CheckoutComponent
   ],
@@ -36,16 +30,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'checkout', component: CheckoutComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
       {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
-      // {path: 'menu', component: MenuComponent},
-      {path: '**', redirectTo: 'login'}
+      {path: 'menu', component: MenuComponent},
+      {path: '**', redirectTo: 'menu'}
     ]),
-    NgModule,
+    NgbModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

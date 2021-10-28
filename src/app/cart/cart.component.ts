@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartService } from '../services/cart.service';
+//import { CartService } from '../services/cart.service';
+import { MenuItemService } from '../services/menu-item.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private cartService: CartService) { }
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private cartService: MenuItemService) { }
 
 
   open(content:any) {

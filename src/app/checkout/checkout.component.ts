@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CheckoutService } from '../services/checkout.service' 
+import { MenuItemService } from '../services/menu-item.service';
 declare var AddressFinder: any;
 @Component({
   selector: 'app-checkout',
@@ -48,9 +48,9 @@ export class CheckoutComponent {
   userInfo:Object[];
   itemList:Object[];
   
-  constructor(private cServ:CheckoutService) {
-      this.userInfo = cServ.userInfo;
-      this.itemList = cServ.itemList;
+  constructor(private cServ:MenuItemService) {
+      // this.userInfo = cServ.userInfo;
+      // this.itemList = cServ.itemList;
    }
 
 
