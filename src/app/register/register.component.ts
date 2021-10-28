@@ -71,11 +71,11 @@ export class RegisterComponent implements OnInit {
     this.userServ.signUpUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
-        if (resp === null) {
-          this.isInvaliSignUp = true;
-        } else {
-          this.isInvaliSignUp = false;
-        }
+        this.isInvaliSignUp = false;
+      },
+      er => {
+        console.log(er);
+        this.isInvaliSignUp = true;
       }
     );
   }

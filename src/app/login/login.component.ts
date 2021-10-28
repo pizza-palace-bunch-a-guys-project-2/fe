@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
     this.userServ.loginUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
-        if (resp === null) {
-          this.isInvalidLogin = true;
-        } else {
-          this.isInvalidLogin = false;
-        }
+        this.isInvalidLogin = false;
+      },
+      er => {
+        console.log(er);
+        this.isInvalidLogin = true;
       }
     );
   }

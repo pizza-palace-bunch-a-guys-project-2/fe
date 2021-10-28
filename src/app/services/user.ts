@@ -1,7 +1,3 @@
-export interface IUser {
-    'userName': string;
-    'userPassword': string;
-}
 
 export class User {
     constructor(private userName:string,
