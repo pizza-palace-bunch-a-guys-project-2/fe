@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 // THIS SERVICE IS USED TO CONNECT FRONTEND WITH BACKEND*** NEED TO ADD SPRING BOOT IMPLEMENTATION ONCE AVAILABLE
 // DON'T FORGET DEPENDENCIES FOR POM
-export class UploadFileService {
+export class ImageService {
   constructor(private https: HttpClient) { }
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
     const data: FormData = new FormData();
@@ -24,22 +24,22 @@ export class UploadFileService {
 
 // EVERYTHING BELOW NEEDS TO BE ADDED TO THE COMPONENT IN WHICH WE ARE USING FOR MENU/ITEM.COMPONENT.TS -- SELECTOR -APP-MENU-ITEM
 /*
-import { Component } from '@angular/core';
-import { UploadFileService } from './Services/upload-file.service';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core'; //should already be in imports
+import { ImageService } from './Services/image.service';
+import { HttpClient } from '@angular/common/http'; //should already be in imports
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-menu-item',
+  templateUrl: './app.menu-item.html',
+  styleUrls: ['./app.menu-item.css']
 })
-export class AppComponent {
+export class MenuItemComponent {
   selectedFiles: FileList;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
   selectedFile = null;
   changeImage = false;
   file:string;
-  constructor(private uploadService: UploadFileService, private https:HttpClient){}
+  constructor(private imageService: ImageService, private https:HttpClient){}
   viewFile(){
 window.open('https://bucketName.s3.cloudLocation.amazonaws.com/'+this.file);
   }
@@ -60,7 +60,7 @@ window.open('https://bucketName.s3.cloudLocation.amazonaws.com/'+this.file);
   upload() {
     this.progress.percentage = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
-this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+this.imageService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
       this.selectedFiles = undefined;
     });
   }

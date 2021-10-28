@@ -40,7 +40,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-    <button routerLink="/checkout" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Checkout</button>
+    <button routerLink="/checkout" type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Checkout</button>
   </div>
 </ng-template>
 
@@ -53,7 +53,7 @@
 </div> -->
 
 
-<!-- S3 USE THIS DISREGARD ABOVE COMMENTED OUT-->
+<!-- S3 USE THIS DISREGARD ABOVE COMMENTED OUT--> <!-- TRY IMPLEMENTING ALL FUNCTIONALITY W/ SPRING DATABASE FROM 10.27/10.28 -->
 <!-- <h1>Upload,View & Delete File</h1>
 <input type="file" id="customFile" (change)="selectFile($event)" placeholder="File To Upload">
 <button class="btn btn-primary" [disabled]="!selectedFiles || admincheck || status" (click)="upload()">Save File</button>
@@ -61,3 +61,11 @@
 <input type="text" placeholder="File to View or Delete"  name="image" [(ngModel)]="file">
 <button class="btn btn-primary" style="margin-left: 10px" (click)="viewFile()">View File</button>
 <button class="btn btn-primary" style="margin-left: 10px" (click)="deleteFile()">Delete File</button> -->
+
+
+
+<!--
+  -- check to see if this even necessary once we have login/auth setup since it will be displayed on menu page
+
+  <li *ngIf="isAuthenticated"> </li>
+ -->

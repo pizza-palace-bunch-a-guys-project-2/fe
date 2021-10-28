@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,9 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder) { }
+
+
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private cartService: CartService) { }
 
 
   open(content:any) {
@@ -48,7 +51,7 @@ export class CartComponent implements OnInit {
 
   removeCartItem(item: any) {
     console.log(item);
-    this.items.splice(item, 1);
+    this.items.splice(item, 1); // need to rework this with the adding same item while in cart functionality...spread op
     console.log('item was removed');
   }
 }

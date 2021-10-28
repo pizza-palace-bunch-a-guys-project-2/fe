@@ -28,7 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'cart', component: CartComponent},
+      {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
+      // {path: 'menu', component: MenuComponent},
       {path: '**', redirectTo: 'login'}
     ]),
     NgbModule
