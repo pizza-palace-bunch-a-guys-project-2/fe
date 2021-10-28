@@ -10,12 +10,12 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
- public loginGroup = new FormGroup({
+  loginGroup = new FormGroup({
     userName: new FormControl('', [Validators.required]),
     userPassword: new FormControl('', [Validators.required])
   });
 
-  public isInvalidLogin:boolean = false;
+  isInvalidLogin:boolean = false;
 
   constructor(private userServ:UserService) {}
 
@@ -28,18 +28,16 @@ export class LoginComponent implements OnInit {
   }
 
 
-  loginUser(loginGroup: FormGroup) {
-    const userName:string = loginGroup.get('userName')!.value;
-    const userPassword:string = loginGroup.get('userPassword')!.value;
-    if(userName) {
-      console.log('Form input field username has value: ', userName);
+  loginUser( ) {
+    if( this.name.value) {
+      console.log('Form input field username has value: ',  this.name.value);
     }
 
-    if(userPassword) {
-      console.log('Form input field password has value: ', userPassword);
+    if(this.password.value) {
+      console.log('Form input field password has value: ', this.password.value);
     }
 
-    const user = new User(userName, userPassword);
+    const user = new User(this.name.value, this.password.value);
 
     this.userServ.loginUser(user).subscribe(
       resp => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../services/user';
 import { UserService } from '../services/user.service';
 
@@ -11,37 +11,71 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
 
   signUpGroup = new FormGroup({
-    userName: new FormControl(''),
-    userPassword: new FormControl(''),
-    userEmail: new FormControl(''),
-    userFirstName: new FormControl(''),
-    userLastName: new FormControl(''),
-    userAddress: new FormControl(''),
-    userCity: new FormControl(''),
-    userState: new FormControl(''),
-    userZip: new FormControl('')
+    userName: new FormControl('',[Validators.required]),
+    userPassword: new FormControl('',[Validators.required]),
+    userEmail: new FormControl('',[Validators.required]),
+    userFirstName: new FormControl('',[Validators.required]),
+    userLastName: new FormControl('',[Validators.required]),
+    userAddress: new FormControl('',[Validators.required]),
+    userCity: new FormControl('',[Validators.required]),
+    userState: new FormControl('',[Validators.required]),
+    userZip: new FormControl('',[Validators.required])
   });
+
+  isInvaliSignUp:boolean = false;
 
   constructor(private userServ:UserService) { }
 
+  get name(){
+    return this.signUpGroup.get('userName')!;
+  }
 
-  signUpUser(signUpGroup: FormGroup) {
-    const userName:string = signUpGroup.get('userName')!.value;
-    const userPassword:string = signUpGroup.get('userPassword')!.value;
-    const userEmail:string = signUpGroup.get('userEmail')!.value;
-    const userFirstName:string = signUpGroup.get('userFirstName')!.value;
-    const userLastName:string = signUpGroup.get('userLastName')!.value;
-    const userAddress:string = signUpGroup.get('userAddress')!.value;
-    const userCity:string = signUpGroup.get('userCity')!.value;
-    const userState:string = signUpGroup.get('userState')!.value;
-    const userZip:number = signUpGroup.get('userZip')!.value;
+  get password(){
+    return this.signUpGroup.get('userPassword')!;
+  }
+
+  get email(){
+    return this.signUpGroup.get('userEmail')!;
+  }
+
+  get firstName(){
+    return this.signUpGroup.get('userFirstName')!;
+  }
+
+  get lastName(){
+    return this.signUpGroup.get('userLastName')!;
+  }
+
+  get address(){
+    return this.signUpGroup.get('userAddress')!;
+  }
+
+  get city(){
+    return this.signUpGroup.get('userCity')!;
+  }
+
+  get state(){
+    return this.signUpGroup.get('userState')!;
+  }
+
+  get zip(){
+    return this.signUpGroup.get('userZip')!;
+  }
+
+
+  signUpUser() {
     const userRoleId:number = 1;
 
-    const user = new User(userName, userPassword, userEmail, userFirstName, userLastName, userRoleId);
+    const user = new User(this.name.value, this.password.value, this.email.value, this.firstName.value, this.lastName.value, userRoleId);
 
     this.userServ.signUpUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
+        if (resp === null) {
+          this.isInvaliSignUp = true;
+        } else {
+          this.isInvaliSignUp = false;
+        }
       }
     );
   }
