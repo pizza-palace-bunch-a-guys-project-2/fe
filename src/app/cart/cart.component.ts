@@ -11,15 +11,35 @@ import { CartService } from '../services/cart.service';
 export class CartComponent implements OnInit {
 
   closeResult: string = '';
-
   items: any;
 
 
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, public cartService: CartService) {
+    const sub = this.cartService.cartItems.subscribe((data: any) => {
+      console.warn('Data', data)
+      this.items = data
+    });
 
+    // sub.unsubscribe();
 
+  }
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private cartService: CartService) { }
+  //menu comp - temp method, move to menu
+  addItemToCart() {
+    const mockItem = {
+      id: 5,
+      name: 'BBQ chicken',
+      description: 'mushrooms, green peppers, tomatoes, black olives, and onions',
+      price: 15,
+      qty: 1
+    }
+    console.warn("Item Added:", mockItem)
+    this.cartService.addItem(mockItem)
+  }
 
+  updateItemQty(item: any, qty: any) {
+    this.cartService.updateItemQty(item, parseInt(qty.target.value))
+  }
 
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -50,9 +70,8 @@ export class CartComponent implements OnInit {
   }
 
   removeCartItem(item: any) {
-    console.log(item);
-    this.items.splice(item, 1); // need to rework this with the adding same item while in cart functionality...spread op
     console.log('item was removed');
+    this.cartService.removeItem(item)
   }
 }
 
