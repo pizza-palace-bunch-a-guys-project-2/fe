@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../services/user';
 import { UserService } from '../services/user.service';
 
@@ -11,31 +11,47 @@ import { UserService } from '../services/user.service';
 export class LoginComponent implements OnInit {
 
   loginGroup = new FormGroup({
-    userName: new FormControl(''),
-    userPassword: new FormControl('')
+    userName: new FormControl('', [Validators.required]),
+    userPassword: new FormControl('', [Validators.required])
   });
 
-  constructor(private userServ:UserService) { }
+  isInvalidLogin:boolean = false;
 
-  loginUser(loginGroup: FormGroup) {
-    const userName:string = loginGroup.get('userName')!.value;
-    const userPassword:string = loginGroup.get('userPassword')!.value;
-    if(userName) {
-      console.log('Form input field username has value: ', userName);
+  constructor(private userServ:UserService) {}
+
+  get name() {
+    return this.loginGroup.get('userName')!;
+  }
+
+  get password() {
+    return this.loginGroup.get('userPassword')!;
+  }
+
+
+  loginUser( ) {
+    if( this.name.value) {
+      console.log('Form input field username has value: ',  this.name.value);
     }
 
-    if(userPassword) {
-      console.log('Form input field password has value: ', userPassword);
+    if(this.password.value) {
+      console.log('Form input field password has value: ', this.password.value);
     }
 
-    const user = new User(userName, userPassword);
+    const user = new User(this.name.value, this.password.value);
 
     this.userServ.loginUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
+        this.isInvalidLogin = false;
+      },
+      er => {
+        console.log(er);
+        this.isInvalidLogin = true;
       }
     );
   }
+
+
 
   ngOnInit(): void {
   }

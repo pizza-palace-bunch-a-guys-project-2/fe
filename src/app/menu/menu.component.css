@@ -1,0 +1,45 @@
+.custom-margin {
+  margin: 2em 12em;
+}
+
+@media screen and (max-width: 1400px) {
+  .custom-margin {
+    margin: 2em 8em;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .custom-margin {
+    margin: 2em 25em;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .custom-margin {
+    margin: 2em 20em;
+  }
+}
+
+@media screen and (max-width: 1099px) {
+  .custom-margin {
+    margin: 2em 17em;
+  }
+}
+
+@media screen and (max-width: 965px) {
+  .custom-margin {
+    margin: 2em 12em;
+  }
+}
+
+@media screen and (max-width: 845px) {
+  .custom-margin {
+    margin: 2em 8em;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .custom-margin {
+    margin: 2em 1em;
+  }
+}
