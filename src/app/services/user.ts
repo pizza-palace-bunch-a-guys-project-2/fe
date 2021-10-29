@@ -5,7 +5,10 @@ export class User {
         private userEmail?:string,
         private userFirstName?:string,
         private userLastName?:string,
-        private userRoleId?:number,
-        private userId?:number
+        private userAddress?:string,
+        private userCity?:string,
+        private userState?:string,
+        private userZip?:string,
+        private userId?:number,
         ) {}
 }

@@ -64,9 +64,16 @@ export class RegisterComponent implements OnInit {
 
 
   signUpUser() {
-    const userRoleId:number = 1;
 
-    const user = new User(this.name.value, this.password.value, this.email.value, this.firstName.value, this.lastName.value, userRoleId);
+    const user = new User(this.name.value,
+      this.password.value,
+      this.email.value,
+      this.firstName.value,
+      this.lastName.value,
+      this.address.value,
+      this.city.value,
+      this.state.value,
+      this.zip.value);
 
     this.userServ.signUpUser(user).subscribe(
       resp => {
