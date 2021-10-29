@@ -48,7 +48,7 @@ import { RegisterComponent } from './register/register.component';
     NgbModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
