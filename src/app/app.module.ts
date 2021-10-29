@@ -22,7 +22,7 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
     MenuComponent,
     MenuItemComponent,
     CartComponent,
