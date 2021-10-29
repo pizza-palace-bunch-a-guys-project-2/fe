@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 
@@ -7,16 +7,22 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UserService {
+  private url = "http://localhost:9015/users";
 
-  private url = "http://localhost:8080/project1/";
+  private httpHead = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
   loginUser(user: User):Observable<User> {
-    return this.http.post<User>(this.url + "login.user", user);
+    return this.http.post<User>(this.url +"/login", user, this.httpHead);
   }
 
   signUpUser(user: User):Observable<User> {
-    return this.http.post<User>(this.url + "signup.user", user);
+    return this.http.post<User>(this.url, user, this.httpHead);
   }
 }
