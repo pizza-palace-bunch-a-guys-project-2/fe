@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+.navbar{
+    background-color: green;
+
+    width: 110%;
+    
+          height: 200px;
+    
+    padding-top: 70px;
+    
+    margin-top: -10px; 
+    margin-left:-80px;
+    text-align:center;
+    
+    font-size: 100px;
+
+}
