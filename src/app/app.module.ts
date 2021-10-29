@@ -16,6 +16,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {Header3Component } from './header3/header3.component';
+import {Footer2Component} from './footer2/footer2.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RegisterComponent } from './register/register.component';
     CartComponent,
     CheckoutComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    Header3Component,
+    Footer2Component
   ],
   imports: [
     BrowserModule,
