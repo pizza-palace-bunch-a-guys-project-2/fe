@@ -15,3 +15,11 @@
 .reg-card {
     background-color: rgb(235, 238, 238);
 }
+
+.zip-errors {
+    font-size: 0.7em;
+}
+
+.state-errors {
+    font-size: 0.7em;
+}
