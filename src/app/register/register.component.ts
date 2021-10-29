@@ -11,9 +11,9 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
 
   signUpGroup = new FormGroup({
-    userName: new FormControl('',[Validators.required]),
-    userPassword: new FormControl('',[Validators.required]),
-    userEmail: new FormControl('',[Validators.required]),
+    userName: new FormControl('',[Validators.required, Validators.minLength(4)]),
+    userPassword: new FormControl('',[Validators.required, Validators.minLength(4)]),
+    userEmail: new FormControl('',[Validators.required, Validators.email]),
     userFirstName: new FormControl('',[Validators.required]),
     userLastName: new FormControl('',[Validators.required]),
     userAddress: new FormControl('',[Validators.required]),
@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   });
 
   isInvaliSignUp:boolean = false;
+  isInvalidUsername:boolean = false;
 
   constructor(private userServ:UserService) { }
 
@@ -63,8 +64,8 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  signUpUser() {
 
+  signUpUser() {
     const user = new User(this.name.value,
       this.password.value,
       this.email.value,
@@ -75,14 +76,21 @@ export class RegisterComponent implements OnInit {
       this.state.value,
       this.zip.value);
 
+      if(user.haveEmptyStrings()) {
+        this.isInvaliSignUp = true;
+        return
+      } else {
+        this.isInvaliSignUp = false;
+      }
+
     this.userServ.signUpUser(user).subscribe(
       resp => {
         console.log("Response: ", resp);
-        this.isInvaliSignUp = false;
+        this.isInvalidUsername = false;
       },
       er => {
         console.log(er);
-        this.isInvaliSignUp = true;
+        this.isInvalidUsername = true;
       }
     );
   }
