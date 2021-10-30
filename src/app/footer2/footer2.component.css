@@ -1,0 +1,15 @@
+#div2{
+    height:300px;
+    width:300px;
+    
+    float:left;
+}
+#div3{
+    height:300px;
+    width:300px;
+}
+p{
+    display: block;
+    text-align: center;
+   
+}
