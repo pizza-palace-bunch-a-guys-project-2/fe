@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Item, Data, itemList } from '../services/menuitem';
-import { CartService } from '../services/cart.service';
-
+import { ItemService } from './item.service';
+import { Item } from './menuitem';
 
 @Component({
   selector: 'app-menu-item',
@@ -10,27 +9,16 @@ import { CartService } from '../services/cart.service';
 })
 export class MenuItemComponent implements OnInit {
 
-  items: any;
+  itemList: Item[] = [];
 
-  constructor(private itemServe:CartService) {
-    //this.items = itemServe.cartData._value;
-    this.items = itemList;
-  }
-
-
+  constructor(private itemServe:ItemService) { }
 
   ngOnInit(): void {
-    console.log(this.items);
+    this.itemServe.getItems().subscribe(
+      response => {
+        this.itemList = response;
+      }
+    );
   }
-
-  addItemToCart(item) {
-
-    this.itemServe.addItem(item);
-
-  }
-
-
-
-
 
 }
