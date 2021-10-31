@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { ItemService } from './item.service';
 import { Item } from './menuitem';
 
@@ -7,9 +7,15 @@ import { Item } from './menuitem';
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.css']
 })
-export class MenuItemComponent implements OnInit {
+export class MenuItemComponent implements OnInit, DoCheck {
 
   itemList: Item[] = [];
+  filteredList: Item[] = [];
+  filter: string;
+
+  @Input()isPizza:boolean;
+  @Input()isDessert:boolean;
+  @Input()isDrinks:boolean;
 
   constructor(private itemServe:ItemService) { }
 
@@ -19,6 +25,17 @@ export class MenuItemComponent implements OnInit {
         this.itemList = response;
       }
     );
+  }
+
+  ngDoCheck(): void {
+    this.isPizza && this.changeFilter("pizza");
+    this.isDessert && this.changeFilter("dessert");
+    this.isDrinks && this.changeFilter("drink");
+  }
+
+  private changeFilter(newFilter: string) {
+    this.filter = newFilter;
+    this.filteredList = this.itemList.filter((item: Item) => item.type === this.filter);
   }
 
 }
