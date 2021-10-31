@@ -6,21 +6,27 @@ import { Component, OnInit } from '@angular/core';
   template: `
  <!--   <nav class="navbar" > -->
 
-      <!-- logo --> 
+      <!-- logo --> <!---->
    <!--  <div class="navbar-brand"> -->
-   <div class="navbar">Pizza App
+   <div class="navbar"> Pizza Palace
    
        
-      </div>
-  <!--  </nav> -->
+      </div><div id="im1"> </div>
+  <!--  </nav> <img src= "(./header3/80generated.jpg)">-->
   `,
   styleUrls:['./header3.component.css']
 })
 export class Header3Component implements OnInit {
 
   constructor() { }
- var1='Pizza';
+ 
+ 
+ //document.getElementById("./header3/80_generated.jpg") as HTMLImageElement;
   ngOnInit(): void {
   }
+  var1='Pizza';
+ // url= document.getElementById("./header3/80generated.jpg") as HTMLImageElement;
+  //url ="./app/assets/80generated.jpg";
+
 
 }
