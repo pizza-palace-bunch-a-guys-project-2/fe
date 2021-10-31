@@ -75,4 +75,6 @@ export class CartComponent implements OnInit {
     console.log('item was removed');
     this.cartService.removeItem(item)
   }
+
+
 }
