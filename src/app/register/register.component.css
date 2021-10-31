@@ -1,0 +1,25 @@
+.register-section {
+    background-image: url('../../assets/img/login_pic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.register-image {
+    border-radius: .25rem;
+    height: 65%;
+    margin-top: 10%;
+    margin-left:4%;
+}
+
+.reg-card {
+    background-color: rgb(235, 238, 238);
+}
+
+.zip-errors {
+    font-size: 0.7em;
+}
+
+.state-errors {
+    font-size: 0.7em;
+}
