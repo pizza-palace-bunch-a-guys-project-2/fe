@@ -13,9 +13,9 @@ export class MenuItemComponent implements OnInit, DoCheck {
   filteredList: Item[] = [];
   filter: string;
 
-  @Input()isPizza:boolean;
-  @Input()isDessert:boolean;
-  @Input()isDrinks:boolean;
+  @Input() isPizza: boolean;
+  @Input() isDessert: boolean;
+  @Input() isDrinks: boolean;
 
   constructor(private itemServe:ItemService) { }
 
@@ -33,9 +33,8 @@ export class MenuItemComponent implements OnInit, DoCheck {
     this.isDrinks && this.changeFilter("drink");
   }
 
-  private changeFilter(newFilter: string) {
+  private changeFilter(newFilter: string): void {
     this.filter = newFilter;
     this.filteredList = this.itemList.filter((item: Item) => item.type === this.filter);
   }
-
 }
