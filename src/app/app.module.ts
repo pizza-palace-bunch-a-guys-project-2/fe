@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import {Header3Component } from './header3/header3.component';
 import {Footer2Component} from './footer2/footer2.component';
 import { LoadingComponent } from './loading/loading.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,9 @@ import { LoadingComponent } from './loading/loading.component';
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'checkout', component: CheckoutComponent},
-      {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
-      {path: 'menu', component: MenuComponent},
+      {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard]},
+      {path: 'cart', component: CartComponent, canActivate:[AuthGuard]}, // keep for now demo then place in menu route once merged and use as modal
+      {path: 'menu', component: MenuComponent, canActivate:[AuthGuard]},
       {path: '**', redirectTo: 'login'}
     ]),
     NgbModule,

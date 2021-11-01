@@ -17,6 +17,7 @@ export class UserService {
   };
 
   private logedUser:User;
+  private loginUserStatus:boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -30,10 +31,15 @@ export class UserService {
 
   setLogedUser(user:User) {
     this.logedUser = user;
+    this.loginUserStatus = true;
   }
 
   getLogedUser():User {
     return this.logedUser;
+  }
+
+  isLoggedIn():boolean {
+    return this.loginUserStatus;
   }
   
 }
