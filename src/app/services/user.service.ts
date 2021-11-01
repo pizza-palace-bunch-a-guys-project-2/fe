@@ -16,6 +16,8 @@ export class UserService {
     })
   };
 
+  private logedUser:User;
+
   constructor(private http: HttpClient) { }
 
   loginUser(user: User):Observable<User> {
@@ -25,4 +27,13 @@ export class UserService {
   signUpUser(user: User):Observable<User> {
     return this.http.post<User>(this.url, user, this.httpHead);
   }
+
+  setLogedUser(user:User) {
+    this.logedUser = user;
+  }
+
+  getLogedUser():User {
+    return this.logedUser;
+  }
+  
 }

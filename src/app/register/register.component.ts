@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../services/user';
 import { UserService } from '../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
   isInvaliSignUp:boolean = false;
   isInvalidUsername:boolean = false;
 
-  constructor(private userServ:UserService) { }
+  constructor(private userServ:UserService, private router:Router) { }
 
   get name(){
     return this.signUpGroup.get('userName')!;
@@ -87,6 +88,7 @@ export class RegisterComponent implements OnInit {
       resp => {
         console.log("Response: ", resp);
         this.isInvalidUsername = false;
+        this.router.navigate(['/login']);
       },
       er => {
         console.log(er);
