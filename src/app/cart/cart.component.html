@@ -18,18 +18,20 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Amount</th>
+          <!-- <th>Amount</th> -->
           <th>Price</th>
           <th>Remove</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items | async; let i = index;"> <!-- REMOVED ASNYC PIPE -->
-          <td>{{ item.name }}</td>
-          <td>
+        <tr *ngFor="let item of items | async; let i = index;">
+          <td>{{ item.itemName }}</td>
+          <!-- <td>{{ item.name }}</td> --> <!-- NP EDITING DEMO****** KEEP THIS CHANGE -->
+<!--           <td>
              <input class= "product-quantity" type="number" [value]="item.qty" min="1" (click)="updateItemQty(item, $event)">
-          </td>
-          <td>{{ item.qty*item.price | currency:'USD':'symbol':'1.2-2' }}</td>
+          </td> -->
+          <!-- <td>{{ item.qty*item.price | currency:'USD':'symbol':'1.2-2' }}</td> --> <!-- NP EDITING DEMO************** -->
+          <td>{{ item.price | currency }}</td>
           <td><button (click)="removeCartItem(item)" class="btn btn-danger btn-sm">Remove</button></td>
         </tr>
       </tbody>
@@ -40,12 +42,13 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-    <button routerLink="/checkout" type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Checkout</button>
+    <button  routerLink="/checkout" type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Checkout</button>
+
   </div>
 </ng-template>
 
 
-<button (click)="addItemToCart()">Add Item</button>
+<!-- <button (click)="addItemToCart()">Add Item</button> --> <!-- NP EDIT DEMO*********** -->
 
 
 <!-- S3 IMAGE UPLOADING TESTING FUNCTIONALITY - NEEDS TO UPLOAD INITIALLY TO MENU -->

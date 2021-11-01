@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Order } from './order';
 import { CheckoutService } from './checkout.service';
+import { CartService } from '../services/cart.service';
 //import { MenuItemService } from '../services/menu-item.service';
 declare var AddressFinder: any;
 @Component({
@@ -38,20 +39,20 @@ export class CheckoutComponent implements OnInit {
   address: String = "";
   paymentDetails: String = "";
   userId: number = 1;
-  
 
-  constructor(private cServ:CheckoutService) {
+
+  constructor(private cServ:CheckoutService, private cartService: CartService) {
     // this.userInfo = cServ.userInfo;
     // this.itemList = cServ.itemList;   private cServ:MenuItemService
   }
   ngOnInit(): void {
-    
+
   }
 
   createOrder() {
     let order = new Order(this.items, this.getPaymentDetails(this.paymentGroup), this.getAddress(this.addressGroup), this.total, this.userId)
     console.log(order);
-    
+
     this.submitOrder(order);
   }
 
@@ -106,6 +107,6 @@ export class CheckoutComponent implements OnInit {
     return this.address;
   }
 
-  
+
 
 }

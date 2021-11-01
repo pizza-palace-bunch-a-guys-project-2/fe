@@ -38,4 +38,8 @@ export class MenuItemComponent implements OnInit, DoCheck {
     this.filter = newFilter;
     this.filteredList = this.itemList.filter((item: Item) => item.type === this.filter);
   }
+
+  addItemToCart(item: any) {
+    this.cartService.addItem(item);
+  }
 }

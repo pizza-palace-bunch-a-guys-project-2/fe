@@ -35,12 +35,16 @@ cartData = this.cartItems.asObservable();
     this.cartItems.next(this.cartItems.value.concat(item));
     console.log(this.cartItems);
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
+
+    //NP EDIT DEMO ** try this for pushing to checkout---
+    // localStorage.setItem('cartItems', JSON.stringify(this.cartData.value));
     // console.log(this.cartItems.value);
   }
 
   removeItem(item: any) {
     this.cartItems.next(this.cartData.source.value.filter((i: any) => i.id !== item.id ))
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
+    // localStorage.removeItem('cartItems');
   }
 
   updateItemQty(item: any, qty: number) {
