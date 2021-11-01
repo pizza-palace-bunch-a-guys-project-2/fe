@@ -21,9 +21,12 @@
                           <div class="form-outline">
                             <input type="text" id="userFirstName" class="form-control form-control-lg" formControlName="userFirstName" />
                             <label class="form-label" for="userFirstName">First name</label>
-                            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+                            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger my-errors">
                               <div *ngIf="firstName.errors?.required">
                                 First Name is required
+                              </div>
+                              <div *ngIf="firstName.errors?.pattern">
+                                Unexpected character detected
                               </div>
                             </div>
                           </div>
@@ -32,9 +35,12 @@
                           <div class="form-outline">
                             <input type="text" id="userLastName" class="form-control form-control-lg" formControlName="userLastName" />
                             <label class="form-label" for="userLastName">Last name</label>
-                            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+                            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger my-errors">
                               <div *ngIf="lastName.errors?.required">
                                 Last Name is required
+                              </div>
+                              <div *ngIf="lastName.errors?.pattern">
+                                Unexpected character detected
                               </div>
                             </div>
                           </div>
@@ -46,12 +52,12 @@
                           <div class="form-outline">
                             <input type="text" id="userName" class="form-control form-control-lg" formControlName="userName" />
                             <label class="form-label" for="userName">User name</label>
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger my-errors">
                               <div *ngIf="name.errors?.required">
                                 User Name is required
                               </div>
                               <div *ngIf="name.errors?.minlength">
-                                User Name must be at least 4 characters long.
+                               At least 4 characters long required.
                               </div>
                             </div>
                           </div>
@@ -60,12 +66,12 @@
                           <div class="form-outline">
                             <input type="password" id="userPassword" class="form-control form-control-lg" formControlName="userPassword" />
                             <label class="form-label" for="userPassword">Password</label>
-                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger my-errors">
                               <div *ngIf="password.errors?.required">
                                 Password is required
                               </div>
-                              <div *ngIf="name.errors?.minlength">
-                                Password must be at least 4 characters long.
+                              <div *ngIf="password.errors?.minlength">
+                                At least 4 characters long required.
                               </div>
                             </div>
                           </div>
@@ -75,7 +81,7 @@
                       <div class="form-outline mb-4">
                         <input type="email" id="userEmail" class="form-control form-control-lg" formControlName="userEmail" />
                         <label class="form-label" for="userEmail">Email</label>
-                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger my-errors">
                           <div *ngIf="email.errors?.required">
                             Email is required
                           </div>
@@ -88,7 +94,7 @@
                       <div class="form-outline mb-4">
                         <input type="text" id="userAddress" class="form-control form-control-lg" formControlName="userAddress" />
                         <label class="form-label" for="userAddress">Address</label>
-                        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger my-errors">
                           <div *ngIf="address.errors?.required">
                             Address is required
                           </div>
@@ -100,9 +106,12 @@
                           <div class="form-outline">
                             <input type="text" id="userCity" class="form-control form-control-lg" formControlName="userCity" />
                             <label class="form-label" for="userCity">City</label>
-                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger my-errors">
                               <div *ngIf="city.errors?.required">
                                 City is required
+                              </div>
+                              <div *ngIf="city.errors?.pattern">
+                                Unexpected character detected
                               </div>
                             </div>
                           </div>
@@ -111,9 +120,12 @@
                           <div class="form-outline">
                             <input type="text" id="userState" class="form-control form-control-lg" formControlName="userState" />
                             <label class="form-label" for="userState">State</label>
-                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
-                              <div *ngIf="state.errors?.required" class="state-errors">
+                            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger my-errors">
+                              <div *ngIf="state.errors?.required">
                                 Required
+                              </div>
+                              <div *ngIf="state.errors?.pattern || state.errors?.minlength || state.errors?.maxlength">
+                                Invalid
                               </div>
                             </div>
                           </div>
@@ -122,15 +134,20 @@
                             <div class="form-outline">
                               <input type="text" id="userZip" class="form-control form-control-lg" formControlName="userZip" />
                               <label class="form-label" for="userZip">Zip Code</label>
-                              <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger">
-                                <div *ngIf="zip.errors?.required" class="zip-errors">
+                              <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger my-errors">
+                                <div *ngIf="zip.errors?.required">
                                   Required
+                                </div>
+                                <div *ngIf="zip.errors?.pattern">
+                                  Invalid
+                                </div>
+                                <div *ngIf="zip.errors?.minlength">
+                                 5 digits
                                 </div>
                               </div>
                             </div>
                           </div>
-                      </div>
-      
+                      </div>     
                       <div class="d-flex justify-content-center pt-3">
                         <button type="button" class="btn btn-primary btn-lg ms-2" (click)="signUpUser()">Sign Up</button>
                         <button type="button" class="btn btn-secondary btn-lg ms-2" routerLink="/login">To Login</button>
