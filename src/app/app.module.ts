@@ -32,7 +32,7 @@ import {Footer2Component} from './footer2/footer2.component';
     LoginComponent,
     RegisterComponent,
     Header3Component,
-    Footer2Component
+    Footer2Component,
   ],
   imports: [
     BrowserModule,
