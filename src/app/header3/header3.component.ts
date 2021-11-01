@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
       <!-- logo --> <!---->
    <!--  <div class="navbar-brand"> -->
-   <div class="navbar"> Pizza Palace <div class="mendiv">Menu About Us Directions Search</div>
+   <div class="navbar"><div class="title1"> Pizza Palace</div> <div class="mendiv">Menu About Us Directions Search</div>
    
        
       </div><div id="im1"> </div>
