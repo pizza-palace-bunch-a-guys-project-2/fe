@@ -52,7 +52,7 @@ import {Footer2Component} from './footer2/footer2.component';
     NgbModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

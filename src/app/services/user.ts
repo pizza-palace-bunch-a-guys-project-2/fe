@@ -1,15 +1,15 @@
 
 export class User {
-    constructor(private userName:string,
-        private userPassword:string,
-        private userEmail?:string,
-        private userFirstName?:string,
-        private userLastName?:string,
-        private userAddress?:string,
-        private userCity?:string,
-        private userState?:string,
-        private userZip?:string,
-        private userId?:number,
+    constructor(public userName:string,
+        public userPassword:string,
+        public userEmail?:string,
+        public userFirstName?:string,
+        public userLastName?:string,
+        public userAddress?:string,
+        public userCity?:string,
+        public userState?:string,
+        public userZip?:string,
+        public userId?:number,
         ) {};
 
     haveEmptyStrings():boolean {
