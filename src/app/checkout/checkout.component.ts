@@ -30,6 +30,9 @@ export class CheckoutComponent implements OnInit {
     zipcode: new FormControl('')
   });
 
+  tipGroup = new FormGroup({
+    tip_amount: new FormControl('')
+  });
 
   pizzaPic = "https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ=";
   userInfo: Object[];
@@ -38,15 +41,23 @@ export class CheckoutComponent implements OnInit {
   address: String = "";
   paymentDetails: String = "";
   userId: number = 1;
-  
-
+  finalTotal:number;
+  itemSplit:string[] = [""];
   constructor(private cServ:CheckoutService) {
     // this.userInfo = cServ.userInfo;
     // this.itemList = cServ.itemList;   private cServ:MenuItemService
   }
   ngOnInit(): void {
-    
+    this.itemSplit= this.splitItems(this.items);
   }
+
+  splitItems(items):string[]{
+    this.itemSplit = items.split(", ", items.length)
+    console.log(this.itemSplit);
+    return this.itemSplit;
+  }
+
+
 
   createOrder() {
     let order = new Order(this.items, this.getPaymentDetails(this.paymentGroup), this.getAddress(this.addressGroup), this.total, this.userId)
@@ -67,6 +78,7 @@ export class CheckoutComponent implements OnInit {
       }
     )
   }
+
 
   getPaymentDetails(paymentGroup: FormGroup) {
     let cardNumber = paymentGroup.get('card_number').value;
@@ -106,6 +118,14 @@ export class CheckoutComponent implements OnInit {
     return this.address;
   }
 
-  
+  calculateTotal(tipGroup:FormGroup) {
+    let tip:number = tipGroup.get('tip_amount').value;
+    console.log(tip);
+     this.finalTotal = this.total + tip;
+     console.log(this.finalTotal);
+    return this.finalTotal;
+  }
 
 }
+
+

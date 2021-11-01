@@ -13,102 +13,127 @@
             <div class="collapse show p-3 pt-0" id="collapseExample">
                 <br>
                 <div class="row">
-                    <div class="col-lg-5 mb-lg-0 mb-3">
-                        <p class="h4 mb-0">Summary</p>
-                        <p class="mb-0"><span class="fw-bold">List Items Selected Here</span><span class="c-green">:
-                                Name of
-                                product</span> </p>
-                        <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">:$452.90</span> </p>
-                        <p class="mb-0"> <span class="fw-bold">Add tip</span><span class="c-green">:Total with
-                                tip</span> </p>
-                        <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
-                            max-width="30%" height="35%">
-                        <p class="mb-0">This could be an image of the first item chosen,<br> or provide an outlet for
-                            user
-                            feedback.</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <label class="d-flex justify-content-center">Enter Payment Details</label><br>
-                        <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form__div"> <input id="cnum" type="text" class="form-control"
-                                            placeholder=" " formControlName='card_number'> <label for="cnum"
-                                            class="form__label">Card
-                                            Number</label>
+                    <div class="col-12 mb-lg-0 mb-0">
+                        <label class="h4 mb-0">Order Summary</label><br><br>
+
+                        <label class="d-flex justify-content-left">Order Contents:</label>
+
+                        <!--I want to create a table that displays the individual items from the item store-->
+                        <div class="table">
+                            <table class="table" style="max-width: 50%">
+                                <thead class="thead">
+                                    <tr>
+                                        <th scope="col">Item</th>
+                                        <th sope="col">Quantity</th>
+                                        <th scope="col">Price per item</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr *ngFor="let item of itemSplit; index as i;">
+                                        <td>{{itemSplit[i]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                <label class="d-flex justify-content-right">Subtotal: {{total}}</label><br>
+                        
+
+                        <form action="" class="form" [formGroup]="tipGroup">
+                            <div class="form_div"><input id="tipcalc" type="number" min="0" placeholder="Add Tip "
+                                    class="form-control" style=" max-width: 30%;" formControlName="tip_amount"
+                                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+                            </div><br>
+                            <div class="col-6"><button type="button" class="btn btn-primary" style="max-width:60%"
+                                    (click)="calculateTotal(tipGroup)">Confirm Tip Amount</button></div>
+                        </form><br>
+                        <label class="d-flex justify-content-left">Total with Tip: {{finalTotal}}</label>
+                        <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
+                            max-width="30%" height="35%"> -->
+                            <br><br>
+                        <div class="col-lg-5">
+                            <label class="d-flex justify-content-center">Enter Payment Details</label><br>
+                            <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form__div"> <input id="cnum" type="text" class="form-control"
+                                                placeholder=" " formControlName='card_number'> <label for="cnum"
+                                                class="form__label">Card
+                                                Number</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form__div"> <input id="cexpdate" type="text" class="form-control"
-                                            placeholder=" " formControlName='cardexpiration'> <label for="cexpdate"
-                                            class="form__label">Expiration Date
-                                            (MM/YY)</label> </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form__div"> <input id="cvv" type="password" class="form-control"
-                                            placeholder=" " formControlName='security_code'> <label for="cvv"
-                                            class="form__label">CVV
-                                            code</label>
+                                    <div class="col-6">
+                                        <div class="form__div"> <input id="cexpdate" type="text" class="form-control"
+                                                placeholder=" " formControlName='cardexpiration'> <label for="cexpdate"
+                                                class="form__label">Expiration Date
+                                                (MM/YY)</label> </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form__div"> <input id="cholder" type="text" class="form-control"
-                                            placeholder=" " formControlName='cardholder'> <label for="cholder"
-                                            class="form__label">Cardholder
-                                            Name</label> </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form__div"> <input id="billing" type="text" class="form-control"
-                                            placeholder=" " formControlName='billingzip'> <label for="billing"
-                                            class="form__label">Billing
-                                            Zipcode</label> </div>
-                                </div><label class="d-flex justify-content-center">Enter Delivery Address</label>
-                                <!-- <div class="col-12">
+                                    <div class="col-6">
+                                        <div class="form__div"> <input id="cvv" type="password" class="form-control"
+                                                placeholder=" " formControlName='security_code'> <label for="cvv"
+                                                class="form__label">CVV
+                                                code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form__div"> <input id="cholder" type="text" class="form-control"
+                                                placeholder=" " formControlName='cardholder'> <label for="cholder"
+                                                class="form__label">Cardholder
+                                                Name</label> </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form__div"> <input id="billing" type="text" class="form-control"
+                                                placeholder=" " formControlName='billingzip'> <label for="billing"
+                                                class="form__label">Billing
+                                                Zipcode</label> </div>
+                                    </div><label class="d-flex justify-content-center">Enter Delivery Address</label>
+                                    <!-- <div class="col-12">
                                     <button class="btn btn-primary w-100"
                                         (click)="getPaymentDetails(paymentGroup)">Confirm
                                         Payment Details</button>
                                 </div> -->
-                            </div>
-                        </form>
-                        <br>
-                        <div class="col-lg-12">
-                            <form action="" class="form" style="margin-left:2em" [formGroup]="addressGroup">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="sname" type="text" class="form-control"
-                                                placeholder=" " formControlName='street_name'> <label for="sname"
-                                                class="form__label">Street Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="city" type="text" class="form-control"
-                                                placeholder=" " formControlName='city'> <label for="city"
-                                                class="form__label">City</label> </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="state" type="text" class="form-control"
-                                                placeholder=" " formControlName='state'> <label for="state"
-                                                class="form__label">State Abbreviation</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="zipcode" type="text" class="form-control"
-                                                placeholder=" " formControlName='zipcode'> <label for="zipcode"
-                                                class="form__label">Zipcode</label> </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100" (click)="createOrder()">Place Order</button>
-                                    </div> 
                                 </div>
                             </form>
+                            <br>
+                            <div class="col-lg-12">
+                                <form action="" class="form" style="margin-left:2em" [formGroup]="addressGroup">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="sname" type="text" class="form-control"
+                                                    placeholder=" " formControlName='street_name'> <label for="sname"
+                                                    class="form__label">Street Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="city" type="text" class="form-control"
+                                                    placeholder=" " formControlName='city'> <label for="city"
+                                                    class="form__label">City</label> </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="state" type="text" class="form-control"
+                                                    placeholder=" " formControlName='state'> <label for="state"
+                                                    class="form__label">State Abbreviation</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="zipcode" type="text" class="form-control"
+                                                    placeholder=" " formControlName='zipcode'> <label for="zipcode"
+                                                    class="form__label">Zipcode</label> </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" (click)="createOrder()">Place
+                                                Order</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- <form [formGroup]="paymentGroup">
+    <!-- <form [formGroup]="paymentGroup">
     <h2>Input Card Number</h2>
     <input type="text" formControlName='card_number'>
     <h2>Input Cardholder Name</h2>
