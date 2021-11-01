@@ -18,7 +18,9 @@ export class MenuItemComponent implements OnInit, DoCheck {
   @Input() isDessert: boolean;
   @Input() isDrinks: boolean;
 
-  constructor(private itemServe:ItemService, private cartService: CartService) { }
+  constructor(private itemServe:ItemService, private cartService: CartService) {
+
+   }
 
   ngOnInit(): void {
     this.itemServe.getItems().subscribe(

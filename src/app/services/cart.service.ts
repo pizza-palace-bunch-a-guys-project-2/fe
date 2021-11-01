@@ -1,27 +1,36 @@
 import { EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { Item } from '../menu-item/Iitem';
+import { NgIf } from '@angular/common';
 //import { User } from './user';
 
 // import { UserService } from './user.service';
 // menucomponent etc.
 
 
-export interface MenuItem {
-  id?: number;
-  name: string;
-  description?: string;
+export interface MenuItem extends Item {
+  itemId?: number;
+  itemName: string;
+  description: string;
   price: number;
   remove?: boolean;
+  qty?: number; //NP EDIT DEMO ************ try this with cart comp html see if sets to 1 upon add + 2 below
+  orderTotal?: number;
+  orderTax?: number;
+  orderTaxTotal?: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-cartItems: any = new BehaviorSubject([]);
+cartItems: any = new BehaviorSubject<MenuItem[]>([]);
 cartData = this.cartItems.asObservable();
+
+totalAmount$: Observable<number>;
 
     // add user service injection
   constructor(private http: HttpClient) {
@@ -29,9 +38,20 @@ cartData = this.cartItems.asObservable();
     console.warn('Cart Service')
     const itemList = JSON.parse(localStorage.getItem('cartItems')) || [];
     this.cartItems.next(itemList);
+
+    this.totalAmount$ = this.cartData.pipe(
+      map((items: MenuItem[]) => {
+        return items.reduce((a, b) => a += b.price, 0);
+      })
+    );
   }
 
-  addItem(item: any) {
+  addItem(item: MenuItem) {
+    if (this.cartItems.value.findIndex(o => o.itemId === item.itemId) >= 0) {
+      alert('already added!');
+      return;
+    }
+
     this.cartItems.next(this.cartItems.value.concat(item));
     console.log(this.cartItems);
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
@@ -41,8 +61,8 @@ cartData = this.cartItems.asObservable();
     // console.log(this.cartItems.value);
   }
 
-  removeItem(item: any) {
-    this.cartItems.next(this.cartData.source.value.filter((i: any) => i.id !== item.id ))
+  removeItem(item: MenuItem) {
+    this.cartItems.next(this.cartData.source.value.filter((i: any) => i.itemId !== item.itemId ))
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
     // localStorage.removeItem('cartItems');
   }
@@ -55,6 +75,11 @@ cartData = this.cartItems.asObservable();
     cartData[index].qty = qty; // assigns qty to item to update
     this.cartItems.next(cartData) // updates observable with updated item
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
+  }
+
+  clear() {
+    this.cartData.next([]);
+    localStorage.setItem('cartItems', '');
   }
 
 
