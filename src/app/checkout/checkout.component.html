@@ -48,7 +48,7 @@
                       </div>
 
                       <br>
-                    <div class="col-lg-5">
+                    <!-- <div class="col-lg-5">
                         <label class="d-flex justify-content-center">Enter Payment Details</label><br>
                         <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
                             <div class="row">
@@ -84,44 +84,178 @@
                                             class="form__label">Billing
                                             Zipcode</label> </div>
                                 </div><label class="d-flex justify-content-center">Enter Delivery Address</label>
-                                <!-- <div class="col-12">
+                                <div class="col-12">
                                     <button class="btn btn-primary w-100"
                                         (click)="getPaymentDetails(paymentGroup)">Confirm
                                         Payment Details</button>
-                                </div> -->
+                                </div>
                             </div>
-                        </form>
+                        </form> -->
                         <br>
-                        <div class="col-lg-12">
-                            <form action="" class="form" style="margin-left:2em" [formGroup]="addressGroup">
+                        <label class="d-flex justify-content-right">Subtotal: {{total}}</label><br>
+
+
+                        <form action="" class="form" [formGroup]="tipGroup">
+                            <div class="form_div"><input id="tipcalc" type="number" min="0" placeholder="Add Tip "
+                                    class="form-control" style=" max-width: 30%;" formControlName="tip_amount"
+                                    onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
+                            </div><br>
+                            <div class="col-6"><button type="button" class="btn btn-primary" style="max-width:60%"
+                                    (click)="calculateTotal(tipGroup)">Confirm Tip Amount</button></div>
+                        </form><br>
+                        <label class="d-flex justify-content-left">Total with Tip: {{finalTotal}}</label>
+                        <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
+                            max-width="30%" height="35%"> -->
+                        <br><br>
+                        <div class="col-lg-5">
+                            <label class="d-flex justify-content-center">Enter Payment Details</label><br>
+                            <form style="margin-left:2em" [formGroup]="paymentGroup">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="sname" type="text" class="form-control"
-                                                placeholder=" " formControlName='street_name'> <label for="sname"
-                                                class="form__label">Street Name</label>
+                                    <div class="col-12">
+                                        <div class="form__div"> <input id="cnum" type="text" class="form-control"
+                                                placeholder=" " formControlName='card_number'> <label for="cnum"
+                                                class="form__label">Card
+                                                Number</label>
+                                            <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="card_number.errors?.required">Card Number is Required</div>
+                                                <div *ngIf="card_number.errors?.pattern">Unexpected Character Detected
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form__div"> <input id="city" type="text" class="form-control"
-                                                placeholder=" " formControlName='city'> <label for="city"
-                                                class="form__label">City</label> </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form__div"> <input id="state" type="text" class="form-control"
-                                                placeholder=" " formControlName='state'> <label for="state"
-                                                class="form__label">State Abbreviation</label>
+                                        <div class="form__div"> <input id="cexpdate" type="text" class="form-control"
+                                                placeholder=" " formControlName='cardexpiration'> <label for="cexpdate"
+                                                class="form__label">Expiration Date
+                                                (MM/YY)</label>
+                                            <div *ngIf="cardexpiration.invalid && (cardexpiration.dirty || cardexpiration.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="cardexpiration.errors?.required">Expiration Date is Required
+                                                </div>
+                                                <div *ngIf="cardexpiration.errors?.pattern">Unexpected Character
+                                                    Detected
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form__div"> <input id="zipcode" type="text" class="form-control"
-                                                placeholder=" " formControlName='zipcode'> <label for="zipcode"
-                                                class="form__label">Zipcode</label> </div>
+                                        <div class="form__div"> <input id="cvv" type="password" class="form-control"
+                                                placeholder=" " formControlName='security_code'> <label for="cvv"
+                                                class="form__label">CVV
+                                                code</label>
+                                            <div *ngIf="security_code.invalid && (security_code.dirty || security_code.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="security_code.errors?.required">CVV is Required
+                                                </div>
+                                                <div *ngIf="security_code.errors?.pattern">Unexpected Character
+                                                    Detected
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" (click)="createOrder()">Place Order</button>
+                                        <div class="form__div"> <input id="cholder" type="text" class="form-control"
+                                                placeholder=" " formControlName='cardholder'> <label for="cholder"
+                                                class="form__label">Cardholder
+                                                Name</label>
+                                            <div *ngIf="cardholder.invalid && (cardholder.dirty || cardholder.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="cardholder.errors?.required">Cardholder Name is Required
+                                                </div>
+                                                <div *ngIf="cardholder.errors?.pattern">Unexpected Character
+                                                    Detected
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col-6">
+                                        <div class="form__div"> <input id="billing" type="text" class="form-control"
+                                                placeholder=" " formControlName='billingzip'> <label for="billing"
+                                                class="form__label">Billing
+                                                Zipcode</label>
+                                            <div *ngIf="billingzip.invalid && (billingzip.dirty || billingzip.touched)"
+                                                class="alert alert-danger">
+                                                <div *ngIf="billingzip.errors?.required">Billing Zipcode is Required
+                                                </div>
+                                                <div *ngIf="billingzip.errors?.pattern">Unexpected Character
+                                                    Detected
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="d-flex justify-content-center">Enter Delivery Address</label>
                                 </div>
                             </form>
+                            <br>
+                            <div class="col-lg-12">
+                                <form style="margin-left:2em" [formGroup]="addressGroup">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="sname" type="text" class="form-control"
+                                                    placeholder=" " formControlName='street_name'> <label for="sname"
+                                                    class="form__label">Street Name</label>
+                                                <div *ngIf="street_name.invalid && (street_name.dirty || street_name.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="street_name.errors?.required">Street Name is Required
+                                                    </div>
+                                                    <div *ngIf="street_name.errors?.pattern">Unexpected Character
+                                                        Detected
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="city" type="text" class="form-control"
+                                                    placeholder=" " formControlName='city'>
+                                                <label for="city" class="form__label">City</label>
+                                                <div *ngIf="city.invalid && (city.dirty || city.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="city.errors?.required">City Name is Required
+                                                    </div>
+                                                    <div *ngIf="city.errors?.pattern">Unexpected Character
+                                                        Detected
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="state" type="text" class="form-control"
+                                                    placeholder=" " formControlName='state'>
+                                                <label for="state" class="form__label">State Abbreviation</label>
+                                                <div *ngIf="state.invalid && (state.dirty || state.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="state.errors?.required">
+                                                        Required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="state.errors?.pattern || state.errors?.minlength || state.errors?.maxlength">
+                                                        Invalid
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input id="zipcode" type="text" class="form-control"
+                                                    placeholder=" " formControlName='zipcode'>
+                                                <label for="zipcode" class="form__label">Zipcode</label>
+                                                <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="zipcode.errors?.required">Zipcode is Required
+                                                    </div>
+                                                    <div *ngIf="zipcode.errors?.pattern">Unexpected Character
+                                                        Detected
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" (click)="createOrder()">Place
+                                                Order</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,3 +276,4 @@
     <input type="text" formControlName='billingzip'>
      <button class="btn btn-primary" (click)=""</button>
 </form> -->
+    </div>
