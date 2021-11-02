@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../services/user';
 import { UserService } from '../services/user.service';
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
 
   loginGroup = new FormGroup({
     userName: new FormControl('', [Validators.required]),
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   isInvalidLogin:boolean = false;
 
   constructor(private userServ:UserService, private router:Router) {}
+
 
   get name() {
     return this.loginGroup.get('userName')!;
@@ -63,8 +64,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-
 
   ngOnInit(): void {
   }
