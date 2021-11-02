@@ -43,5 +43,6 @@ export class MenuItemComponent implements OnInit, DoCheck {
 
   addItemToCart(item: any) {
     this.cartService.addItem(item);
+    // alert('your item has been added to the cart');
   }
 }

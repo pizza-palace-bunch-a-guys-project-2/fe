@@ -42,11 +42,12 @@
                           <span>SubTotal: {{ totalAmount$ | async | currency }}</span>
                           <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
                           <br>
-                          <span>Tax:{{ totalAmountTax$ | async | currency }}</span>
+                          <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
                           <br>
-                          <span>OrderTotal:{{ totalAmountCheckout$ | async | currency }}</span>
+                          <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
                       </div>
 
+                      <br>
                     <div class="col-lg-5">
                         <label class="d-flex justify-content-center">Enter Payment Details</label><br>
                         <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
