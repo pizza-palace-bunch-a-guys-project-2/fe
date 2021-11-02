@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Order } from './order';
 import { CheckoutService } from './checkout.service';
 //import { MenuItemService } from '../services/menu-item.service';
@@ -13,21 +13,23 @@ export class CheckoutComponent implements OnInit {
 
   hasOrder = false;
 
+  stateRegex:string = "^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$";
+
 
 
   paymentGroup = new FormGroup({
-    card_number: new FormControl(''),
-    cardholder: new FormControl(''),
-    cardexpiration: new FormControl(''),
-    security_code: new FormControl(''),
-    billingzip: new FormControl('')
+    card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]),
+    cardholder: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    cardexpiration: new FormControl('', [Validators.required]),
+    security_code: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(3), Validators.maxLength(3)]),
+    billingzip: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
   });
 
   addressGroup = new FormGroup({
-    street_name: new FormControl(''),
-    city: new FormControl(''),
-    state: new FormControl(''),
-    zipcode: new FormControl('')
+    street_name: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+    state: new FormControl('', [Validators.required, Validators.pattern(this.stateRegex), Validators.minLength(2), Validators.maxLength(2)]),
+    zipcode: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
   });
 
   tipGroup = new FormGroup({
@@ -43,6 +45,7 @@ export class CheckoutComponent implements OnInit {
   userId: number = 1;
   finalTotal:number;
   itemSplit:string[] = [""];
+  
   constructor(private cServ:CheckoutService) {
     // this.userInfo = cServ.userInfo;
     // this.itemList = cServ.itemList;   private cServ:MenuItemService
@@ -60,7 +63,11 @@ export class CheckoutComponent implements OnInit {
 
 
   createOrder() {
-    let order = new Order(this.items, this.getPaymentDetails(this.paymentGroup), this.getAddress(this.addressGroup), this.total, this.userId)
+    let order = new Order(this.items, 
+      this.getPaymentDetails(), 
+      this.getAddress(), 
+      this.total, 
+      this.userId)
     console.log(order);
     
     this.submitOrder(order);
@@ -80,38 +87,38 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  getPaymentDetails(paymentGroup: FormGroup) {
-    let cardNumber = paymentGroup.get('card_number').value;
-    let cardHolder = paymentGroup.get('cardholder').value;
-    let cardExpiration = paymentGroup.get('cardexpiration').value;
-    let securityCode = paymentGroup.get('security_code').value;
-    let billingZip = paymentGroup.get('billingzip').value;
-
+  getPaymentDetails() {
+    // let cardNumber = paymentGroup.get('card_number').value;
+    // let cardHolder = paymentGroup.get('cardholder').value;
+    // let cardExpiration = paymentGroup.get('cardexpiration').value;
+    // let securityCode = paymentGroup.get('security_code').value;
+    // let billingZip = paymentGroup.get('billingzip').value;
+    
     this.paymentDetails = "";
-
-    this.paymentDetails += cardNumber + ', ';
-    this.paymentDetails += cardHolder + ', ';
-    this.paymentDetails += cardExpiration + ', ';
-    this.paymentDetails += securityCode + ', ';
-    this.paymentDetails += billingZip;
+    this.paymentDetails += this.card_number.value + ', ';
+    this.paymentDetails += this.cardholder.value + ', ';
+    this.paymentDetails += this.cardexpiration.value + ', ';
+    this.paymentDetails += this.security_code.value + ', ';
+    this.paymentDetails += this.billingzip.value;
+    
     console.log(this.paymentDetails);
 
     return this.paymentDetails;
 
   }
 
-  getAddress(addressGroup: FormGroup) {
-    let streetName = addressGroup.get('street_name').value;
-    let city = addressGroup.get('city').value;
-    let state = addressGroup.get('state').value;
-    let zipcode = addressGroup.get('zipcode').value;
+  getAddress() {
+    // let streetName = addressGroup.get('street_name').value;
+    // let city = addressGroup.get('city').value;
+    // let state = addressGroup.get('state').value;
+    // let zipcode = addressGroup.get('zipcode').value;
 
     this.address = "";
 
-    this.address += streetName + ', ';
-    this.address += city + ', ';
-    this.address += state + ', ';
-    this.address += zipcode;
+    this.address += this.street_name.value + ', ';
+    this.address += this.city.value + ', ';
+    this.address += this.state.value + ', ';
+    this.address += this.zipcode.value;
 
     console.log(this.address);
 
@@ -126,6 +133,60 @@ export class CheckoutComponent implements OnInit {
     return this.finalTotal;
   }
 
+  get card_number() {
+    return this.paymentGroup.get('card_number')!
+  };
+
+  get cardholder() {
+    return this.paymentGroup.get('cardholder')!
+  };
+
+  get cardexpiration() {
+    return this.paymentGroup.get('cardexpiration')!
+  };
+
+  get security_code() {
+    return this.paymentGroup.get('security_code')!
+  };
+
+  get billingzip(){
+    return this.paymentGroup.get('billingzip')!
+  };
+
+  get street_name() {
+    return this.addressGroup.get('street_name')!
+  };
+
+  get city(){
+    return this.addressGroup.get('city')!
+  };
+
+  get state(){
+    return this.addressGroup.get('city')!
+  };
+
+  get zipcode(){
+    return this.addressGroup.get('zipcode')!
+  };
+
+
 }
 
 
+
+
+
+  // paymentGroup = new FormGroup({
+  //   card_number: new FormControl('',[Validators.required, Validators.minLength(8)]),
+  //   cardholder: new FormControl('',[Validators.required, Validators.minLength(6)] ),
+  //   cardexpiration: new FormControl('', [Validators.required]),
+  //   security_code: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(3), Validators.maxLength(3)]),
+  //   billingzip: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
+  // });
+
+  // addressGroup = new FormGroup({
+  //   street_name: new FormControl('', [Validators.required]),
+  //   city: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+  //   state: new FormControl('', [Validators.required, Validators.pattern(this.stateRegex), Validators.minLength(2), Validators.maxLength(2)]),
+  //   zipcode: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
+  // });
