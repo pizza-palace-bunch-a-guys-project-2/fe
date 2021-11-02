@@ -16,6 +16,9 @@ export class UserService {
     })
   };
 
+  private logedUser:User;
+  private loginUserStatus:boolean;
+
   constructor(private http: HttpClient) { }
 
   loginUser(user: User):Observable<User> {
@@ -25,4 +28,22 @@ export class UserService {
   signUpUser(user: User):Observable<User> {
     return this.http.post<User>(this.url, user, this.httpHead);
   }
+
+  setLogedUser(user:User) {
+    this.logedUser = user;
+    this.loginUserStatus = true;
+  }
+
+  getLogedUser():User {
+    return this.logedUser;
+  }
+
+  isLoggedIn():boolean {
+    return this.loginUserStatus;
+  }
+
+  logout() {
+    this.loginUserStatus = false;
+  }
+  
 }
