@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Pizza Palace</a>
+      <a class="navbar-brand"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" routerLinkActive="active" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="register">Register</a>
+            <a class="nav-link" *ngIf="!currentRoute('menu')" routerLink="menu">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="login">Log In</a>
+            <a class="nav-link" *ngIf="!currentRoute('checkout')" routerLink="checkout">Checkout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="login">Sign out</a>
+            <a class="nav-link" (click)="preventBackButton()" routerLink="login">Log out</a>
           </li>
         </ul>
       </div>
