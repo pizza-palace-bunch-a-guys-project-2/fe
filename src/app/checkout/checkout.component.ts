@@ -19,6 +19,8 @@ export class CheckoutComponent implements OnInit {
   items$: Observable<MenuItem[]>; //NP EDIT DEMO
 
   totalAmount$: Observable<number>;
+  totalAmountTax$: Observable<number>;
+  totalAmountCheckout$: Observable<number>;
 
   paymentGroup = new FormGroup({
     card_number: new FormControl(''),
@@ -61,6 +63,8 @@ export class CheckoutComponent implements OnInit {
 
     this.items$ = cartService.cartItems;
     this.totalAmount$ = cartService.totalAmount$;
+    this.totalAmountTax$ = cartService.totalAmountTax$;
+    this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
 
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
   }

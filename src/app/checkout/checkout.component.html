@@ -41,7 +41,10 @@
                           <p class="h4 mb-0">Summary</p>
                           <span>SubTotal: {{ totalAmount$ | async | currency }}</span>
                           <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
-                          <!-- <span>OrderTotal:{{ totalAmount$ | async | currency }}</span> -->
+                          <br>
+                          <span>Tax:{{ totalAmountTax$ | async | currency }}</span>
+                          <br>
+                          <span>OrderTotal:{{ totalAmountCheckout$ | async | currency }}</span>
                       </div>
 
                     <div class="col-lg-5">

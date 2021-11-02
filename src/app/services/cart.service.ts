@@ -32,6 +32,9 @@ cartItems: any = new BehaviorSubject<MenuItem[]>([]);
 cartData = this.cartItems.asObservable();
 
 totalAmount$: Observable<number>;
+totalAmountTax$: Observable<number>;
+totalAmountCheckout$: Observable<number>;
+
 
     // add user service injection
   constructor(private http: HttpClient) {
@@ -41,9 +44,35 @@ totalAmount$: Observable<number>;
     this.cartItems.next(itemList);
 
     this.totalAmount$ = this.cartData.pipe(
+      //combine w/ async -->mapfilter
       map((items: MenuItem[]) => {
+        // call all elements in cart array
         return items.reduce((a, b) => a += b.price, 0);
-        // return items.reduce((a, b) => a += b.price * b.qty, 0); // going to need to add some more functionality with the amount/total--spacing
+        // return items.reduce((a, b) => a += b.price * b.qty, 0);
+      })
+    );
+
+    this.totalAmountTax$ = this.cartData.pipe(
+      map((items: MenuItem[]) => {
+
+        return items.reduce((a, b) => (a += b.price)*(.08), 0);
+
+      })
+    );
+
+    this.totalAmountTax$ = this.cartData.pipe(
+      map((items: MenuItem[]) => {
+
+        return (.08)*items.reduce((a, b) => (a += b.price), 0);
+
+      })
+    );
+
+    this.totalAmountCheckout$ = this.cartData.pipe(
+      map((items: MenuItem[]) => {
+        // return items.reduce((a, b) => a += (b.price*1.08), 0);
+        return (1.08)*items.reduce((a, b) => a += b.price, 0);
+
       })
     );
   }
