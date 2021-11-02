@@ -101,9 +101,9 @@
                                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                             </div><br>
                             <div class="col-6"><button type="button" class="btn btn-primary" style="max-width:60%"
-                                    (click)="calculateTotal(tipGroup)">Confirm Tip Amount</button></div>
+                                    >Confirm Tip Amount</button></div><!--(click)="calculateTotal(tipGroup)"-->
                         </form><br>
-                        <label class="d-flex justify-content-left">Total with Tip: {{finalTotal}}</label>
+                        <label class="d-flex justify-content-left">Total with Tip: </label><!--{{finalTotal}}-->
                         <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
                             max-width="30%" height="35%"> -->
                         <br><br>
@@ -262,18 +262,5 @@
             </div>
         </div>
     </div>
-</div>
-<!-- <form [formGroup]="paymentGroup">
-    <h2>Input Card Number</h2>
-    <input type="text" formControlName='card_number'>
-    <h2>Input Cardholder Name</h2>
-    <input type="text" formControlName='cardholder'>
-    <h2>Input Card Expiration Date</h2>
-    <input type="text" formControlName='cardexpiration'>
-    <h2>Input Security Code</h2>
-    <input type="text" formControlName='security_code'>
-    <h2>Input Billing Zip Code</h2>
-    <input type="text" formControlName='billingzip'>
-     <button class="btn btn-primary" (click)=""</button>
-</form> -->
-    </div>
+
+
