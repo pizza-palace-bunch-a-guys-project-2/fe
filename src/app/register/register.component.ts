@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     userFirstName: new FormControl('',[Validators.required,  Validators.pattern("^[a-zA-Z]*$")]),
     userLastName: new FormControl('',[Validators.required,  Validators.pattern("^[a-zA-Z]*$")]),
     userAddress: new FormControl('',[Validators.required]),
-    userCity: new FormControl('',[Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+    userCity: new FormControl('',[Validators.required, Validators.pattern("^[a-zA-Z ']*$")]),
     userState: new FormControl('',[Validators.required, Validators.pattern(this.stateRegex), Validators.minLength(2), Validators.maxLength(2)]),
     userZip: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
   });
