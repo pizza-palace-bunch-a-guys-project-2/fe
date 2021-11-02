@@ -41,5 +41,9 @@ export class UserService {
   isLoggedIn():boolean {
     return this.loginUserStatus;
   }
+
+  logout() {
+    this.loginUserStatus = false;
+  }
   
 }
