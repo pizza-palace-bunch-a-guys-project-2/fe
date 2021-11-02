@@ -2,6 +2,12 @@
   margin: 2em 12em;
 }
 
+.card-size-custom {
+  min-width: 33.750em;
+  min-height: 12.500em;
+}
+
+
 @media screen and (max-width: 1400px) {
   .custom-margin {
     margin: 2em 8em;

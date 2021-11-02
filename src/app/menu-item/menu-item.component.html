@@ -1,9 +1,19 @@
 <!-- Menu-Item Card -->
 <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
-  <div *ngFor="let item of filteredList" class="card mb-3 mx-2" style="max-width: 540px">
+  <div
+    *ngFor="let item of filteredList"
+    class="card mb-3 mx-2"
+    style="
+      max-width: 540px;
+      max-height: 12.5em;
+      min-width: 33.75em;
+      min-height: 12.5em;
+    "
+  >
     <div class="row g-0">
       <div class="col-md-4">
         <img
+          style="max-width: 9.375em; max-height: 11.875em"
           [src]="item.imageURL"
           class="img-fluid rounded-start"
           [alt]="item.itemName"
@@ -20,11 +30,49 @@
           </p>
         </div>
         <div class="my-3 mx-2">
-          <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart">+</button>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            title="Add to Cart"
+          >
+            +
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Added To Cart</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">
+        View the cart menu to modify or remove your selection.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
