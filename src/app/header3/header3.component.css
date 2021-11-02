@@ -24,7 +24,7 @@
     #im1{
         
         width:300px;
-        height:300px;
+        height:290px;
     
         background-image:url('./80_generated.jpg');
         background-size:cover;
@@ -34,7 +34,7 @@
         z-index:1;
         position:absolute;
         top:0px;
-        margin-left: 10%; 
+        margin-left: 0%; 
         
         
         
@@ -42,10 +42,10 @@
 
     .mendiv{
        
-       
+       top:200px;
        font-size:20px;
        position:absolute;
-       left:75%;
+       left:70%;
        
     }
     
