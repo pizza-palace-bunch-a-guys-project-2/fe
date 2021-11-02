@@ -42,6 +42,7 @@ totalAmount$: Observable<number>;
     this.totalAmount$ = this.cartData.pipe(
       map((items: MenuItem[]) => {
         return items.reduce((a, b) => a += b.price, 0);
+        // return items.reduce((a, b) => a += b.price * b.qty, 0); // going to need to add some more functionality with the amount/total
       })
     );
   }
