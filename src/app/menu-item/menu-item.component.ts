@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
+import { CartService } from '../services/cart.service';
 import { ItemService } from './item.service';
 import { Item } from './menuitem';
 
@@ -16,7 +17,9 @@ export class MenuItemComponent implements OnInit, DoCheck {
   @Input() isDessert: boolean;
   @Input() isDrinks: boolean;
 
-  constructor(private itemServe:ItemService) { }
+  constructor(private itemServe:ItemService, private cartService: CartService) {
+
+   }
 
   ngOnInit(): void {
     this.itemServe.getItems().subscribe(
@@ -34,5 +37,10 @@ export class MenuItemComponent implements OnInit, DoCheck {
 
   private changeFilter(filter: string): void {
     this.filteredList = this.itemList.filter((item: Item) => item.type === filter);
+  }
+
+  addItemToCart(item: any) {
+    this.cartService.addItem(item);
+    // alert('your item has been added to the cart');
   }
 }

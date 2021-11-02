@@ -5,28 +5,49 @@
 <div class="d-flex justify-content-center">
     <div class="boxclass">
         <div class="card-body border p-0">
-            <p> <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
+            <p>
+              <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
                     data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
                     aria-controls="collapseExample"> <span class="fw-bold">Payment Details</span> <span class=""> <span
                             class="fab fa-cc-amex"></span> <span class="fab fa-cc-mastercard"></span> <span
-                            class="fab fa-cc-discover"></span> </span> </a> </p>
+                            class="fab fa-cc-discover"></span> </span>
+                </a>
+            </p>
+
             <div class="collapse show p-3 pt-0" id="collapseExample">
                 <br>
                 <div class="row">
-                    <div class="col-lg-5 mb-lg-0 mb-3">
-                        <p class="h4 mb-0">Summary</p>
-                        <p class="mb-0"><span class="fw-bold">List Items Selected Here</span><span class="c-green">:
-                                Name of
-                                product</span> </p>
-                        <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">:$452.90</span> </p>
-                        <p class="mb-0"> <span class="fw-bold">Add tip</span><span class="c-green">:Total with
-                                tip</span> </p>
-                        <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
-                            max-width="30%" height="35%">
-                        <p class="mb-0">This could be an image of the first item chosen,<br> or provide an outlet for
-                            user
-                            feedback.</p>
-                    </div>
+                    <!-- <div class="col-lg-5 mb-lg-0 mb-3"> -->
+                      <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3">
+                          <p class="mb-0"><span class="fw-bold">List Items Selected Here</span><span class="c-green">:
+                                  {{item.itemName}}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">{{ item.price | currency }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Add tip</span><span class="c-green">{{ (item.orderTotal * .08) | currency}}</span> </p>
+                          <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
+                              max-width="30%" height="35%"> -->
+                              <!-- NP EDIT DEMO ******** IMAGE TAG ABOVE -->
+                              <img
+                              [src]="item.imageURL"
+                              class="img-fluid rounded-start"
+                              [alt]="item.itemName"
+                            />
+                            <!-- NP EDIT DEMO *** P TAG BELOW -->
+                          <!-- <p class="mb-0">This could be an image of the first item chosen,<br> or provide an outlet for
+                              user
+                              feedback.</p> -->
+                      </div>
+
+                      <div>
+                          <p class="h4 mb-0">Summary</p>
+                          <span>SubTotal: {{ totalAmount$ | async | currency }}</span>
+                          <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
+                          <br>
+                          <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
+                          <br>
+                          <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
+                      </div>
+
+                      <br>
                     <div class="col-lg-5">
                         <label class="d-flex justify-content-center">Enter Payment Details</label><br>
                         <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
@@ -98,7 +119,7 @@
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" (click)="createOrder()">Place Order</button>
-                                    </div> 
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -119,5 +140,5 @@
     <input type="text" formControlName='security_code'>
     <h2>Input Billing Zip Code</h2>
     <input type="text" formControlName='billingzip'>
-     <button class="btn btn-primary" (click)=""</button> 
+     <button class="btn btn-primary" (click)=""</button>
 </form> -->
