@@ -10,16 +10,16 @@
             <a class="nav-link" *ngIf="!currentRoute('menu')" routerLink="menu">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" *ngIf="!currentRoute('checkout')" routerLink="checkout">Checkout</a>
+            <a class="nav-link" *ngIf="!currentRoute('cart')" routerLink="cart">Cart</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" routerLink="menu">Menu</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="cart">Cart</a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="checkout">Checkout</a>
+            <!-- <a class="nav-link" routerLink="checkout">Checkout</a> -->
             <a class="nav-link" (click)="preventBackButton()" routerLink="login">Log out</a>
           </li>
         </ul>
