@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 
       <!-- logo --> <!---->
    <!--  <div class="navbar-brand"> -->
-   <div class="navbar"><div class="title1"> </div> <div class="mendiv"><table><tr><td>Menu</td><td width="30"></td> <td>About Us</td><td width="30"></td> <td>Directions</td><td width="30"></td> <td>Search</td></tr></table></div>
+   <div class="navbar"><div class="title1"> </div> <div class="mendiv"><table><tr><td><a routerLink="child-a"  routerLinkActive="active">Menu</a></td><td width="30"></td> <td>About Us</td><td width="30"></td> <td>Directions</td><td width="30"></td> <td>Search</td><td><form id="form"> 
+   <input type="search" id="query" name="q" placeholder="Search...">
+   <button>Search</button>
+ </form> </td></tr></table></div>
    
        
       </div><div id="im1"> </div>
