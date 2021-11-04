@@ -15,7 +15,11 @@ export class MenuComponent implements OnInit {
   isDessert: boolean;
   isDrinks: boolean;
 
-  constructor() { }
+  
+  constructor(private userServ:UserService) {
+  }
+
+  userName = this.userServ.getLogedUser().userName;
 
   ngOnInit(): void {
     this.selectedPizzaMenu();

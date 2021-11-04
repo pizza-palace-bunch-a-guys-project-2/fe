@@ -29,19 +29,6 @@ export class CartComponent implements OnInit {
 
   }
 
-  //menu comp - temp method, move to menu
-  // addItemToCart() {
-  //   const mockItem = {
-  //     id: 5,
-  //     name: 'BBQ chicken',
-  //     description: 'mushrooms, green peppers, tomatoes, black olives, and onions',
-  //     price: 15,
-  //     qty: 1
-  //   }
-  //   console.warn("Item Added:", mockItem)
-  //   this.cartService.addItem(mockItem)
-  // }
-
   updateItemQty(item: any, qty: any) {
     this.cartService.updateItemQty(item, parseInt(qty.target.value))
   }

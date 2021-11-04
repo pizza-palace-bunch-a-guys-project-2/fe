@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { Item } from '../menu-item/Iitem';
 import { NgIf } from '@angular/common';
@@ -16,12 +16,13 @@ export interface MenuItem extends Item {
   itemName: string;
   description: string;
   price: number;
-  remove: boolean;
-  qty: number; //NP EDIT DEMO ************ try this with cart comp html see if sets to 1 upon add + 2 below
-  orderTotal: number;
-  orderTax: number;
-  orderTaxTotal: number;
-  imageURL: string;
+  remove?: boolean;
+  qty?: number; //NP EDIT DEMO ************ try this with cart comp html see if sets to 1 upon add + 2 below
+  orderTotal?: number;
+  orderTax?: number;
+  orderTaxTotal?: number;
+  imageURL?: string;
+  tipAmount?: number;
 }
 
 @Injectable({
@@ -31,8 +32,11 @@ export class CartService {
 cartItems: any = new BehaviorSubject<MenuItem[]>([]);
 cartData = this.cartItems.asObservable();
 
+tipAmount: number;
+
 totalAmount$: Observable<number>;
 totalAmountTax$: Observable<number>;
+totalAmountTip$ = new BehaviorSubject<number>(0);
 totalAmountCheckout$: Observable<number>;
 
 
@@ -52,13 +56,13 @@ totalAmountCheckout$: Observable<number>;
       })
     );
 
-    this.totalAmountTax$ = this.cartData.pipe(
-      map((items: MenuItem[]) => {
+    // this.totalAmountTax$ = this.cartData.pipe(
+    //   map((items: MenuItem[]) => {
 
-        return items.reduce((a, b) => (a += b.price)*(.08), 0);
+    //     return items.reduce((a, b) => (a += b.price)*(.08), 0);
 
-      })
-    );
+    //   })
+    // );
 
     this.totalAmountTax$ = this.cartData.pipe(
       map((items: MenuItem[]) => {
@@ -68,10 +72,43 @@ totalAmountCheckout$: Observable<number>;
       })
     );
 
+    // this.totalAmountTip$ = this.cartData.pipe(
+    //   map((items: MenuItem[]) => {
+
+    //     return (.08)*items.reduce((a, b) => (a += b.price), 0);
+
+    //   })
+    // );
+
+
     this.totalAmountCheckout$ = this.cartData.pipe(
       map((items: MenuItem[]) => {
         // return items.reduce((a, b) => a += (b.price*1.08), 0);
-        return (1.08)*items.reduce((a, b) => a += b.price, 0);
+        return  (this.totalAmountTip$?.value)+(1.08)*items.reduce((a, b) => a += b.price, 0);
+      })
+    );
+  }
+
+
+  /* RETURN VALUE FROM OBSERVABLE BELOW */
+  getValueFromObservable() {
+    return new Promise(resolve => {
+      this.totalAmountCheckout$.pipe(
+        take(1),
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+          resolve(data);
+        })
+    })
+  }
+  /* RETURN VALUE FROM OBERSERVABLE BELOW */
+
+  updateTotal() {
+    this.totalAmountCheckout$ = this.cartData.pipe(
+      map((items: MenuItem[]) => {
+        // return items.reduce((a, b) => a += (b.price*1.08), 0);
+        return (this.totalAmountTip$?.value)+(1.08)*items.reduce((a, b) => a += b.price, 0);
 
       })
     );
@@ -87,6 +124,7 @@ totalAmountCheckout$: Observable<number>;
     console.log(this.cartItems);
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
     alert(`${item.itemName} added to cart.`)
+    this.totalAmountTip$.next(0);
     //NP EDIT DEMO ** try this for pushing to checkout---
     // localStorage.setItem('cartItems', JSON.stringify(this.cartData.value));
     // console.log(this.cartItems.value);
@@ -98,10 +136,12 @@ totalAmountCheckout$: Observable<number>;
     // localStorage.removeItem('cartItems');
   }
 
-  updateItemQty(item: any, qty: number) {
-    const cartData = this.cartData.source.value;
+  updateItemQty(item: MenuItem, qty: number) {
+    // updateItemQty(item: any, qty: number) {
+    const cartData = this.cartData.source.value
     const index: any = cartData.findIndex((i: any) => { // finds index using id's
-      return i.id == item.id
+      return i.itemId == item.itemId
+      // return i.id == item.itemId
     })
     cartData[index].qty = qty; // assigns qty to item to update
     this.cartItems.next(cartData);// updates observable with updated item
@@ -109,8 +149,8 @@ totalAmountCheckout$: Observable<number>;
   }
 
   clear() {
-    this.cartData.next([]);
-    localStorage.setItem('cartItems', '');
+    this.cartItems.next([]);
+    localStorage.removeItem('cartItems');
   }
 
 
