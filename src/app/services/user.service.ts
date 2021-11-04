@@ -29,6 +29,10 @@ export class UserService {
     return this.http.post<User>(this.url, user, this.httpHead);
   }
 
+  updateUser(user: User):Observable<User> {
+    return this.http.patch<User>(this.url, user, this.httpHead);
+  }
+
   setLogedUser(user:User) {
     this.logedUser = user;
     this.loginUserStatus = true;
@@ -43,6 +47,11 @@ export class UserService {
   }
 
   logout() {
+    this.loginUserStatus = false;
+  }
+
+  setUserToDefault() {
+    this.logedUser = new User("","");
     this.loginUserStatus = false;
   }
   

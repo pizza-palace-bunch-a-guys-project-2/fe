@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'ngbd-modal-content',
   template: `
     <div class="modal-header">
       <p><strong>Controls: to move hit arrows right -> and left <-; to jump hit "space".</strong><p>

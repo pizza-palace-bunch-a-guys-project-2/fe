@@ -21,6 +21,7 @@ import {Footer2Component} from './footer2/footer2.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { MiniGameComponent } from './mini-game/mini-game.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MiniGameComponent } from './mini-game/mini-game.component';
     Header3Component,
     Footer2Component,
     LoadingComponent,
-    MiniGameComponent
+    MiniGameComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
