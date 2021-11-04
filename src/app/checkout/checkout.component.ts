@@ -6,6 +6,7 @@ import { Order } from './order';
 import { CheckoutService } from './checkout.service';
 import { CartService, MenuItem } from '../services/cart.service';
 import { createDirectiveTypeParams } from '@angular/compiler/src/render3/view/compiler';
+import { take, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-checkout',
@@ -51,7 +52,7 @@ export class CheckoutComponent implements OnInit {
   itemFood: String = "Cheese Pizza, Breadsticks";
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
 
-  total: number = 25;
+  totalOrder: number;
   address: String = "";
   paymentDetails: String = "";
   userId: number = 1;
@@ -77,7 +78,23 @@ export class CheckoutComponent implements OnInit {
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
   }
   ngOnInit(): void {
-    this.getTotal();
+    this.getValueFromObservable();
+  }
+
+  //gets value from observable
+
+  getValueFromObservable() {
+    return new Promise(resolve => {
+      this.totalAmountCheckout$.pipe(
+        take(1),
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.totalOrder = data;
+          resolve(data);
+        })
+    })
+    
   }
 
   getItems():string {
@@ -94,9 +111,6 @@ export class CheckoutComponent implements OnInit {
    
   };
 
-  getTotal():void {
-    console.log(this.cartService.totalAmount$);
-  };
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
   // createOrder() {
   //   let order = new Order(this.itemFood, this.getPaymentDetails(this.paymentGroup), this.getAddress(this.addressGroup), this.total, this.userId)
@@ -115,7 +129,7 @@ export class CheckoutComponent implements OnInit {
     let order = new Order(this.getItems(),
       this.getPaymentDetails(), 
       this.getAddress(), 
-      this.total, 
+      this.totalOrder,
       this.userId)
     console.log(order);
 
@@ -129,7 +143,7 @@ export class CheckoutComponent implements OnInit {
       response => {
         console.log(response);
 
-        this.cartService.clear();
+        // this.cartService.clear();
       },
       error =>{
         console.warn("there was an error" + error);
