@@ -28,6 +28,10 @@ export class CheckoutComponent implements OnInit {
   // totalAmountTax$:number;
   // totalAmountCheckout$:number;
 
+
+  totalAmountTip$: Observable<number>;
+  tip: any = 0.00;
+
   paymentGroup = new FormGroup({
     card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]),
     cardholder: new FormControl('',[Validators.required, Validators.minLength(6)]),
@@ -73,9 +77,26 @@ export class CheckoutComponent implements OnInit {
     this.items$ = cartService.cartItems;
     this.totalAmount$ = cartService.totalAmount$;
     this.totalAmountTax$ = cartService.totalAmountTax$;
+    this.totalAmountTip$ = cartService.totalAmountTip$;
     this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
     
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
+    console.log(this.totalAmountTip$)
+    console.log(this.totalAmountCheckout$);
+  }
+
+  updateTipAmount(tip) {
+    if (tip.target.value !== '') {
+      this.cartService.totalAmountTip$.next(parseFloat(tip.target?.value)) // input updates this observable
+      this.cartService.updateTotal()   // updates totalAmount
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$; // updates local totalAmount property
+    } else {
+      this.cartService.totalAmountTip$.next(0) // input updates this observable
+      this.cartService.updateTotal()   // updates totalAmount
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$;
+      this.tip = 0.00;
+    }
+
   }
   ngOnInit(): void {
     this.getValueFromObservable();

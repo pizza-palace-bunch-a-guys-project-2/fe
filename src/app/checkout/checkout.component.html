@@ -40,6 +40,22 @@
                           <br>
                           <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
                           <br>
+                          <!-- NP EDIT DEMO *******NEW ADD BELOW -->
+                          <span>Tip:
+                            <input
+                              class="tip"
+                              type="text"
+                              name="tip"
+                              min="0"
+                              max="20"
+                              ng-pattern="onlyNumbers"
+                              value="{{ tip | number: '1.2-2' }}"
+                              (blur)="updateTipAmount($event)">
+                              <!-- try adding ngmask library--works w/ css currency formatting -->
+                          </span>
+                          <br>
+                          <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
+
                           <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
                       </div>
 
