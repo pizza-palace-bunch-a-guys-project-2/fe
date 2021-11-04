@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-//import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Order } from './order';
 import { CheckoutService } from './checkout.service';
 import { CartService, MenuItem } from '../services/cart.service';
-//import { MenuItemService } from '../services/menu-item.service';
-declare var AddressFinder: any;
+import { createDirectiveTypeParams } from '@angular/compiler/src/render3/view/compiler';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -75,8 +74,21 @@ export class CheckoutComponent implements OnInit {
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
   }
   ngOnInit(): void {
-
+    
   }
+
+  getItems():string {
+    let itemArray:any;
+   
+   itemArray = JSON.parse(localStorage.getItem('cartItems'));
+   console.log(itemArray);
+   let itemString:string = "";
+   for(let i = 0; i<itemArray.length; i++){
+     itemString += itemArray[i].itemName + ", "
+   }
+   return itemString;
+   console.log(itemString);
+  };
 
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
   // createOrder() {
@@ -93,7 +105,7 @@ export class CheckoutComponent implements OnInit {
 
 
   createOrder() {
-    let order = new Order(this.itemFood,
+    let order = new Order(this.getItems(),
       this.getPaymentDetails(), 
       this.getAddress(), 
       this.total, 
@@ -119,13 +131,8 @@ export class CheckoutComponent implements OnInit {
   }
 
 
+
   getPaymentDetails() {
-    // let cardNumber = paymentGroup.get('card_number').value;
-    // let cardHolder = paymentGroup.get('cardholder').value;
-    // let cardExpiration = paymentGroup.get('cardexpiration').value;
-    // let securityCode = paymentGroup.get('security_code').value;
-    // let billingZip = paymentGroup.get('billingzip').value;
-    
     this.paymentDetails = "";
     this.paymentDetails += this.card_number.value + ', ';
     this.paymentDetails += this.cardholder.value + ', ';
@@ -140,11 +147,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   getAddress() {
-    // let streetName = addressGroup.get('street_name').value;
-    // let city = addressGroup.get('city').value;
-    // let state = addressGroup.get('state').value;
-    // let zipcode = addressGroup.get('zipcode').value;
-
     this.address = "";
 
     this.address += this.street_name.value + ', ';
