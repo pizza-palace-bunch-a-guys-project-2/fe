@@ -1,19 +1,20 @@
 <!-- Menu-Item Card -->
 <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
+  <!--max-width: 540px;
+      max-height: 12.5em;
+      min-width: 33.75em;
+      min-height: 12.5em;-->
   <div
     *ngFor="let item of filteredList"
     class="card mb-3 mx-2"
     style="
       max-width: 540px;
-      max-height: 12.5em;
-      min-width: 33.75em;
-      min-height: 12.5em;
     "
   >
     <div class="row g-0">
       <div class="col-md-4">
+        <!--style="max-width: 9.375em; max-height: 11.875em"-->
         <img
-          style="max-width: 9.375em; max-height: 11.875em"
           [src]="item.imageURL"
           class="img-fluid rounded-start"
           [alt]="item.itemName"
