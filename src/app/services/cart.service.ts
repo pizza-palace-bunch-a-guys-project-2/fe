@@ -12,16 +12,16 @@ import { NgIf } from '@angular/common';
 
 
 export interface MenuItem extends Item {
-  itemId?: number;
+  itemId: number;
   itemName: string;
   description: string;
   price: number;
-  remove?: boolean;
-  qty?: number; //NP EDIT DEMO ************ try this with cart comp html see if sets to 1 upon add + 2 below
-  orderTotal?: number;
-  orderTax?: number;
-  orderTaxTotal?: number;
-  imageURL?: string;
+  remove: boolean;
+  qty: number; //NP EDIT DEMO ************ try this with cart comp html see if sets to 1 upon add + 2 below
+  orderTotal: number;
+  orderTax: number;
+  orderTaxTotal: number;
+  imageURL: string;
 }
 
 @Injectable({
@@ -79,14 +79,14 @@ totalAmountCheckout$: Observable<number>;
 
   addItem(item: MenuItem) {
     if (this.cartItems.value.findIndex(o => o.itemId === item.itemId) >= 0) {
-      alert('already added!');
+      alert(`${item.itemName} is already in the cart.`);
       return;
     }
 
     this.cartItems.next(this.cartItems.value.concat(item));
     console.log(this.cartItems);
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
-
+    alert(`${item.itemName} added to cart.`)
     //NP EDIT DEMO ** try this for pushing to checkout---
     // localStorage.setItem('cartItems', JSON.stringify(this.cartData.value));
     // console.log(this.cartItems.value);
@@ -99,12 +99,12 @@ totalAmountCheckout$: Observable<number>;
   }
 
   updateItemQty(item: any, qty: number) {
-    const cartData = this.cartData.source.value
+    const cartData = this.cartData.source.value;
     const index: any = cartData.findIndex((i: any) => { // finds index using id's
       return i.id == item.id
     })
     cartData[index].qty = qty; // assigns qty to item to update
-    this.cartItems.next(cartData) // updates observable with updated item
+    this.cartItems.next(cartData);// updates observable with updated item
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems.value));
   }
 

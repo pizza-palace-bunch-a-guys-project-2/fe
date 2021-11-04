@@ -45,10 +45,15 @@
                           <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
                           <br>
                           <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
+
                       </div>
 
                       <br>
-                    <!-- <div class="col-lg-5">
+                    <!--
+
+                        value="{{ tip | number: '1.2-2' }}"
+
+                        <div class="col-lg-5">
                         <label class="d-flex justify-content-center">Enter Payment Details</label><br>
                         <form action="" class="form" style="margin-left:2em" [formGroup]="paymentGroup">
                             <div class="row">

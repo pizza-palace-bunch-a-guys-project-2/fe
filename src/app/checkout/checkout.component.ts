@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Order } from './order';
@@ -75,7 +76,20 @@ export class CheckoutComponent implements OnInit {
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
   }
   ngOnInit(): void {
+    this.getValueFromObservable();
+  }
 
+  //gets value from observable
+  getValueFromObservable() {
+    return new Promise(resolve => {
+      this.totalAmountCheckout$.pipe(
+        take(1),
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+          resolve(data);
+        })
+    })
   }
 
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
