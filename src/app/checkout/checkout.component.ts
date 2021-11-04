@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Order } from './order';
-import { CheckoutService } from './checkout.service';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { CartService, MenuItem } from '../services/cart.service';
-import { createDirectiveTypeParams } from '@angular/compiler/src/render3/view/compiler';
-import { take, map } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { CheckoutService } from './checkout.service';
+import { Order } from './order';
+
 
 @Component({
   selector: 'app-checkout',
@@ -59,10 +59,10 @@ export class CheckoutComponent implements OnInit {
   totalOrder: number;
   address: String = "";
   paymentDetails: String = "";
-  userId: number = 1;
+  userId: number;
+  itemString: string = "";
 
-
-  constructor(private cServ:CheckoutService, private cartService: CartService) {
+  constructor(private cServ:CheckoutService, private cartService: CartService, private uServ:UserService) {
     // this.userInfo = cServ.userInfo;
     // this.itemList = cServ.itemList;   private cServ:MenuItemService
 
@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.getValueFromObservable();
+    
   }
 
   //gets value from observable
@@ -123,12 +123,12 @@ export class CheckoutComponent implements OnInit {
    
    itemArray = JSON.parse(localStorage.getItem('cartItems'));
    
-   let itemString:string = "";
+   
    for(let i = 0; i<itemArray.length; i++){
-     itemString += itemArray[i].itemName + ", "
+     this.itemString += itemArray[i].itemName + ", "
    }
-   console.log(itemString);
-   return itemString;
+   console.log(this.itemString);
+   return this.itemString;
    
   };
 
@@ -147,14 +147,20 @@ export class CheckoutComponent implements OnInit {
 
 
   createOrder() {
+   
+    this.getValueFromObservable()
+    this.userId = this.uServ.getLogedUser().userId
     let order = new Order(this.getItems(),
       this.getPaymentDetails(), 
       this.getAddress(), 
       this.totalOrder,
-      this.userId)
+      this.userId
+      )
     console.log(order);
 
     this.submitOrder(order);
+    this.clearForms();
+    alert("Order Submitted Successfully");
   }
 
   public submitOrder(order){
@@ -164,7 +170,7 @@ export class CheckoutComponent implements OnInit {
       response => {
         console.log(response);
 
-        // this.cartService.clear();
+        this.cartService.clear();
       },
       error =>{
         console.warn("there was an error" + error);
@@ -172,7 +178,11 @@ export class CheckoutComponent implements OnInit {
     )
   }
 
-
+  clearForms(){
+    this.paymentGroup.reset()
+    this.addressGroup.reset()
+    
+  }
 
   getPaymentDetails() {
     this.paymentDetails = "";
@@ -244,6 +254,11 @@ export class CheckoutComponent implements OnInit {
   get zipcode(){
     return this.addressGroup.get('zipcode')!
   };
+
+ 
+  // set card_number(string:""){
+  //   this.paymentGroup.patchValue({card_number: ""})
+  // }
 
 
 }

@@ -14,19 +14,19 @@
                 <br>
                 <div class="row">
                     <!-- <div class="col-lg-5 mb-lg-0 mb-3"> -->
-                      <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3">
+                      <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3 border border-danger">
                           <p class="mb-0"><span class="fw-bold"></span><span class="c-green">
                                   {{item.itemName}}</span> </p>
-                          <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">{{ item.price | currency }}</span> </p>
-                          <p class="mb-0"> <span class="fw-bold">Add tip</span><span class="c-green">{{ (item.orderTotal * .08) | currency}}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Item Price</span><span class="c-green">{{ item.price | currency }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold"></span><span class="c-green">{{ (item.orderTotal * .08) | currency}}</span> </p>
                           <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
                               max-width="30%" height="35%"> -->
                               <!-- NP EDIT DEMO ******** IMAGE TAG ABOVE -->
-                              <img
+                              <!-- <img
                               [src]="item.imageURL"
                               class="img-fluid rounded-start"
                               [alt]="item.itemName"
-                            />
+                            /> -->
                             <!-- NP EDIT DEMO *** P TAG BELOW -->
                           <!-- <p class="mb-0">This could be an image of the first item chosen,<br> or provide an outlet for
                               user
@@ -107,12 +107,12 @@
                         <!-- <label class="d-flex justify-content-right">Subtotal: {{total}}</label><br> -->
 
 
-                        <form action="" class="form" [formGroup]="tipGroup">
+                        <!-- <form action="" class="form" [formGroup]="tipGroup">
                             <div class="form_div"><input id="tipcalc" type="number" min="0" placeholder="Add Tip "
                                     class="form-control" style=" max-width: 30%;" formControlName="tip_amount"
                                     onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                             </div><br>
-                            </form>
+                            </form> -->
                             <!-- <div class="col-6"><button type="button" class="btn btn-primary" style="max-width:60%"
                                     >Confirm Tip Amount</button></div> (click)="calculateTotal(tipGroup)"
                         </form> <br>
