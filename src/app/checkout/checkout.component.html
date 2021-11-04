@@ -55,6 +55,7 @@
                               ng-pattern="onlyNumbers"
                               value="{{ tip | number: '1.2-2' }}"
                               (blur)="updateTipAmount($event)">
+                              <!-- try adding ngmask library--works w/ css currency formatting -->
                           </span>
                           <br>
                           <!-- NP EDIT DEMO *******NEW ADD ABOVE -->

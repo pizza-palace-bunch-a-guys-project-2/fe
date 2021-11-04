@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { Item } from '../menu-item/Iitem';
 import { NgIf } from '@angular/common';
@@ -85,10 +85,24 @@ totalAmountCheckout$: Observable<number>;
       map((items: MenuItem[]) => {
         // return items.reduce((a, b) => a += (b.price*1.08), 0);
         return  (this.totalAmountTip$?.value)+(1.08)*items.reduce((a, b) => a += b.price, 0);
-
       })
     );
   }
+
+
+  /* RETURN VALUE FROM OBSERVABLE BELOW */
+  getValueFromObservable() {
+    return new Promise(resolve => {
+      this.totalAmountCheckout$.pipe(
+        take(1),
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+          resolve(data);
+        })
+    })
+  }
+  /* RETURN VALUE FROM OBERSERVABLE BELOW */
 
   updateTotal() {
     this.totalAmountCheckout$ = this.cartData.pipe(

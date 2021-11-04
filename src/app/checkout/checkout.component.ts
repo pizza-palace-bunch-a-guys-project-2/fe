@@ -74,6 +74,7 @@ export class CheckoutComponent implements OnInit {
 
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
     console.log(this.totalAmountTip$)
+    console.log(this.totalAmountCheckout$);
   }
 
   updateTipAmount(tip) {
