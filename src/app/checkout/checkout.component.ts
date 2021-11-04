@@ -23,6 +23,9 @@ export class CheckoutComponent implements OnInit {
   totalAmount$: Observable<number>;
   totalAmountTax$: Observable<number>;
   totalAmountCheckout$: Observable<number>;
+  // totalAmount$:number;
+  // totalAmountTax$:number;
+  // totalAmountCheckout$:number;
 
   paymentGroup = new FormGroup({
     card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]),
@@ -70,26 +73,30 @@ export class CheckoutComponent implements OnInit {
     this.totalAmount$ = cartService.totalAmount$;
     this.totalAmountTax$ = cartService.totalAmountTax$;
     this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
-
+    
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
   }
   ngOnInit(): void {
-    
+    this.getTotal();
   }
 
   getItems():string {
     let itemArray:any;
    
    itemArray = JSON.parse(localStorage.getItem('cartItems'));
-   console.log(itemArray);
+   
    let itemString:string = "";
    for(let i = 0; i<itemArray.length; i++){
      itemString += itemArray[i].itemName + ", "
    }
-   return itemString;
    console.log(itemString);
+   return itemString;
+   
   };
 
+  getTotal():void {
+    console.log(this.cartService.totalAmount$);
+  };
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
   // createOrder() {
   //   let order = new Order(this.itemFood, this.getPaymentDetails(this.paymentGroup), this.getAddress(this.addressGroup), this.total, this.userId)
