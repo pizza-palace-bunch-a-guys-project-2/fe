@@ -75,6 +75,8 @@ export class CheckoutComponent implements OnInit {
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
     console.log(this.totalAmountTip$)
     console.log(this.totalAmountCheckout$);
+
+
   }
 
   updateTipAmount(tip) {
@@ -91,7 +93,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
+    // this.totalAmountTip$ = null;
   }
 
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
@@ -103,6 +105,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   public submitOrder(order){
+    this.cartService.clear();
+    // this.totalAmountTip$.subscribe(this.ngOnInit);
     console.log(order);
     let stringOrder = JSON.stringify(order);
     this.cServ.insertOrder(stringOrder).subscribe(

@@ -45,7 +45,7 @@ import {Footer2Component} from './footer2/footer2.component';
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'checkout', component: CheckoutComponent},
-      {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
+      // {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
       {path: 'menu', component: MenuComponent},
       {path: '**', redirectTo: 'login'}
     ]),

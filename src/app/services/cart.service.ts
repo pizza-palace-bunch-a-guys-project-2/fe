@@ -148,10 +148,11 @@ totalAmountCheckout$: Observable<number>;
   }
 
   clear() {
-    this.cartData.next([]);
-    localStorage.setItem('cartItems', '');
+    // this.cartData.next([]);
+    this.cartItems.next([]);
+    // localStorage.setItem('cartItems', '');
+    localStorage.removeItem('cartItems');
   }
-
 
   addItemToCheckout(item: any) {
 
