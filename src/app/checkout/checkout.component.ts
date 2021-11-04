@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Order } from './order';
 import { CheckoutService } from './checkout.service';
 import { CartService, MenuItem } from '../services/cart.service';
+import { map } from 'rxjs/operators';
 //import { MenuItemService } from '../services/menu-item.service';
 declare var AddressFinder: any;
 @Component({
@@ -21,6 +22,10 @@ export class CheckoutComponent implements OnInit {
   totalAmount$: Observable<number>;
   totalAmountTax$: Observable<number>;
   totalAmountCheckout$: Observable<number>;
+
+
+  totalAmountTip$: Observable<number>;
+  tip: any = 0.00;
 
   paymentGroup = new FormGroup({
     card_number: new FormControl(''),
@@ -64,9 +69,25 @@ export class CheckoutComponent implements OnInit {
     this.items$ = cartService.cartItems;
     this.totalAmount$ = cartService.totalAmount$;
     this.totalAmountTax$ = cartService.totalAmountTax$;
+    this.totalAmountTip$ = cartService.totalAmountTip$;
     this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
 
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
+    console.log(this.totalAmountTip$)
+  }
+
+  updateTipAmount(tip) {
+    if (tip.target.value !== '') {
+      this.cartService.totalAmountTip$.next(parseFloat(tip.target?.value)) // input updates this observable
+      this.cartService.updateTotal()   // updates totalAmount
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$; // updates local totalAmount property
+    } else {
+      this.cartService.totalAmountTip$.next(0) // input updates this observable
+      this.cartService.updateTotal()   // updates totalAmount
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$;
+      this.tip = 0.00;
+    }
+
   }
   ngOnInit(): void {
 
