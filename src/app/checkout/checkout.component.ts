@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-//import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Order } from './order';
-import { CheckoutService } from './checkout.service';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { CartService, MenuItem } from '../services/cart.service';
-//import { MenuItemService } from '../services/menu-item.service';
-declare var AddressFinder: any;
+import { UserService } from '../services/user.service';
+import { CheckoutService } from './checkout.service';
+import { Order } from './order';
+
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -24,6 +24,12 @@ export class CheckoutComponent implements OnInit {
   totalAmount$: Observable<number>;
   totalAmountTax$: Observable<number>;
   totalAmountCheckout$: Observable<number>;
+  // totalAmount$:number;
+  // totalAmountTax$:number;
+  // totalAmountCheckout$:number;
+
+
+  totalAmountTip$: Observable<number>;
 
   paymentGroup = new FormGroup({
     card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]),
@@ -49,13 +55,13 @@ export class CheckoutComponent implements OnInit {
   itemFood: String = "Cheese Pizza, Breadsticks";
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
 
-  total: number = 25;
+  totalOrder: number;
   address: String = "";
   paymentDetails: String = "";
-  userId: number = 1;
+  userId: number;
+  itemString: string = "";
 
-
-  constructor(private cServ:CheckoutService, private cartService: CartService) {
+  constructor(private cServ:CheckoutService, private cartService: CartService, private uServ:UserService) {
     // this.userInfo = cServ.userInfo;
     // this.itemList = cServ.itemList;   private cServ:MenuItemService
 
@@ -70,13 +76,60 @@ export class CheckoutComponent implements OnInit {
     this.items$ = cartService.cartItems;
     this.totalAmount$ = cartService.totalAmount$;
     this.totalAmountTax$ = cartService.totalAmountTax$;
+    this.totalAmountTip$ = cartService.totalAmountTip$;
     this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
-
+    
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
+    console.log(this.totalAmountTip$)
+    console.log(this.totalAmountCheckout$);
+
+
+  }
+
+  updateTipAmount(tip) {
+    if (tip.target.value !== '') {
+      this.cartService.totalAmountTip$.next(parseFloat(tip.target?.value)) // input updates this observable
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$; // updates local totalAmount property
+    } else {
+      this.cartService.totalAmountTip$.next(0) // input updates this observable
+      this.totalAmountCheckout$ = this.cartService.totalAmountCheckout$;
+    }
+
   }
   ngOnInit(): void {
 
   }
+
+  //gets value from observable
+
+  getValueFromObservable() {
+    return new Promise(resolve => {
+      this.totalAmountCheckout$.pipe(
+        take(1),
+      ).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.totalOrder = data;
+          resolve(data);
+        })
+    })
+
+    // this.totalAmountTip$ = null;
+  }
+
+  getItems():string {
+    let itemArray:any;
+   
+   itemArray = JSON.parse(localStorage.getItem('cartItems'));
+   
+   
+   for(let i = 0; i<itemArray.length; i++){
+     this.itemString += itemArray[i].itemName + ", "
+   }
+   console.log(this.itemString);
+   return this.itemString;
+   
+  };
 
   // NP EDIT DEMO *** CHANGED ITEM TO ITEMFOOD
   // createOrder() {
@@ -93,17 +146,26 @@ export class CheckoutComponent implements OnInit {
 
 
   createOrder() {
-    let order = new Order(this.itemFood,
+   
+    this.getValueFromObservable()
+    this.userId = this.uServ.getLogedUser().userId
+    let order = new Order(this.getItems(),
       this.getPaymentDetails(), 
       this.getAddress(), 
-      this.total, 
-      this.userId)
+      this.totalOrder,
+      this.userId
+      )
     console.log(order);
 
     this.submitOrder(order);
+    this.clearForms();
+    alert("Order Submitted Successfully");
   }
 
   public submitOrder(order){
+    this.cartService.clear();
+
+    // this.totalAmountTip$.subscribe(this.ngOnInit);
     console.log(order);
     let stringOrder = JSON.stringify(order);
     this.cServ.insertOrder(stringOrder).subscribe(
@@ -118,14 +180,13 @@ export class CheckoutComponent implements OnInit {
     )
   }
 
+  clearForms(){
+    this.paymentGroup.reset()
+    this.addressGroup.reset()
+    
+  }
 
   getPaymentDetails() {
-    // let cardNumber = paymentGroup.get('card_number').value;
-    // let cardHolder = paymentGroup.get('cardholder').value;
-    // let cardExpiration = paymentGroup.get('cardexpiration').value;
-    // let securityCode = paymentGroup.get('security_code').value;
-    // let billingZip = paymentGroup.get('billingzip').value;
-    
     this.paymentDetails = "";
     this.paymentDetails += this.card_number.value + ', ';
     this.paymentDetails += this.cardholder.value + ', ';
@@ -140,11 +201,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   getAddress() {
-    // let streetName = addressGroup.get('street_name').value;
-    // let city = addressGroup.get('city').value;
-    // let state = addressGroup.get('state').value;
-    // let zipcode = addressGroup.get('zipcode').value;
-
     this.address = "";
 
     this.address += this.street_name.value + ', ';
@@ -200,6 +256,11 @@ export class CheckoutComponent implements OnInit {
   get zipcode(){
     return this.addressGroup.get('zipcode')!
   };
+
+ 
+  // set card_number(string:""){
+  //   this.paymentGroup.patchValue({card_number: ""})
+  // }
 
 
 }

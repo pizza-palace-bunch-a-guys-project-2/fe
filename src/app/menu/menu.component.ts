@@ -15,7 +15,11 @@ export class MenuComponent implements OnInit {
   isDessert: boolean;
   isDrinks: boolean;
 
-  constructor() { }
+  
+  constructor(private userServ:UserService) {
+  }
+
+  userName = this.userServ.getLogedUser().userName;
 
   ngOnInit(): void {
     this.selectedPizzaMenu();
@@ -39,7 +43,7 @@ export class MenuComponent implements OnInit {
 
   public selectedDrinksMenu(): void {
     this.menuTitle = "Drinks";
-    this.menuDescription = "We are proudly partnered with Coke. Pick the 2 Liter of your choice.";
+    this.menuDescription = "We are proudly partnered with Coke and Pepsi. Pick the 2 Liter of your choice.";
     this.isPizza = false;
     this.isDessert = false;
     this.isDrinks = true;
