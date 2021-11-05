@@ -8,3 +8,10 @@
 input[type="file"] {
   visibility: hidden;
 }
+
+
+.position {
+  position: absolute;
+  top: 195px;
+  right: 75px;
+}
