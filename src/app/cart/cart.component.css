@@ -4,11 +4,9 @@
   float: right;
 }
 
-
 input[type="file"] {
   visibility: hidden;
 }
-
 
 .position {
   position: absolute;
