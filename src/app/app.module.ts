@@ -47,9 +47,9 @@ import { AuthGuard } from './services/auth-guard.service';
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'checkout', component: CheckoutComponent,canActivate:[AuthGuard]},
-      {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
-      {path: 'menu', component: MenuComponent, canActivate:[AuthGuard]},
+      {path: 'checkout', component: CheckoutComponent,/* canActivate:[AuthGuard]*/},
+      {path: 'cart', component: CartComponent/*, canActivate:[AuthGuard]*/},
+      {path: 'menu', component: MenuComponent/*, canActivate:[AuthGuard]}*/},
       {path: '**', redirectTo: 'login'}
     ]),
     NgbModule,
