@@ -7,7 +7,7 @@ import { Item } from '../menu-item/Iitem';
 import { NgIf } from '@angular/common';
 //import { User } from './user';
 
-// import { UserService } from './user.service';
+// import { UserService } from './user.service'
 
 export interface MenuItem extends Item {
   itemId: number;
