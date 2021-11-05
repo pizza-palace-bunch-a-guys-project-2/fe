@@ -1,3 +1,4 @@
+
 <app-cart></app-cart>
 
 <h1 *ngIf="!hasOrder">No Order Found</h1>
@@ -85,7 +86,7 @@
                           </span>
                           <br>
                           <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
-
+                          <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
                     </div>
 
                     <br>
