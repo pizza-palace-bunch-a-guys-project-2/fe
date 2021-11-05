@@ -1,4 +1,9 @@
-<br>
+<app-cart></app-cart>
+
+<h1 *ngIf="!hasOrder">No Order Found</h1>
+<!-- <h1 id="checkoutHeader" *ngIf='hasOrder'>{{}}</h1>  -->
+
+<h1 *ngIf="hasOrder">Get Ready For Pizza!</h1>
 <div class="d-flex justify-content-center">
     <div class="boxclass">
         <div class="card-body border border-secondary p-0">
@@ -15,14 +20,13 @@
                 <br>
                 <div class="row">
                     <!-- <div class="col-lg-5 mb-lg-0 mb-3"> -->
-                    <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3 border border-danger">
-                        <p class="mb-0"><span class="fw-bold"></span><span class="c-black">
-                                {{item.itemName}}</span> </p>
-                        <p class="mb-0"> <span class="fw-bold black">Item Price</span><span class="black">{{ item.price
-                                | currency }}</span> </p>
-                        <p class="mb-0"> <span class="fw-bold"></span><span class="c-black">{{ (item.orderTotal * .08) |
-                                currency}}</span> </p>
-                        <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
+                      <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3">
+                          <p class="mb-0"><span class="fw-bold">List Items Selected Here</span><span class="c-green">:
+                                  {{item.itemName}}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">{{ item.price | currency }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Quantity</span><span class="c-green">{{ item.qty }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Total</span><span class="c-green">{{ item.price * item.qty | currency }}</span> </p>
+                          <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
                               max-width="30%" height="35%"> -->
                         <!-- NP EDIT DEMO ******** IMAGE TAG ABOVE -->
                         <!-- <img
@@ -52,7 +56,28 @@
                         <br>
                         <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
 
-                        <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
+                      <div>
+                          <p class="h4 mb-0">Summary</p>
+                          <span>SubTotal: {{ totalAmount$ | async | currency }}</span>
+                          <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
+                          <br>
+                          <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
+                          <br>
+                          <!-- NP EDIT DEMO *******NEW ADD BELOW -->
+                          <span>Tip:
+                            <input
+                              class="tip"
+                              type="text"
+                              name="tip"
+                              min="0"
+                              max="20"
+                              ng-pattern="onlyNumbers"
+                              value="{{ totalAmountTip$ | async | number: '1.2-2' }}"
+                              (blur)="updateTipAmount($event)">
+                              <!-- try adding ngmask library--works w/ css currency formatting -->
+                          </span>
+                          <br>
+                          <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
 
                     </div>
 
