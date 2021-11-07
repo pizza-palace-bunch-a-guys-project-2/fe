@@ -32,16 +32,16 @@ export class CheckoutComponent implements OnInit {
   totalAmountTip$: Observable<number>;
 
   paymentGroup = new FormGroup({
-    card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8)]),
-    cardholder: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    cardexpiration: new FormControl('', [Validators.required]),
+    card_number: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(16), Validators.maxLength(16)]),
+    cardholder: new FormControl('',[Validators.required, Validators.pattern("^[a-zA-Z_][a-zA-Z_ ]*[a-zA-Z_]$"),Validators.minLength(6)]),
+    cardexpiration: new FormControl('', [Validators.required, Validators.pattern("^((0[1-9])|(1[0-2]))[\/\.\-]*((2[1-9]))$")]),
     security_code: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(3), Validators.maxLength(3)]),
     billingzip: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
   });
 
   addressGroup = new FormGroup({
-    street_name: new FormControl('', [Validators.required]),
-    city: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+    street_name: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$")]),
+    city: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z_][a-zA-Z_ ]*[a-zA-Z_]$")]),
     state: new FormControl('', [Validators.required, Validators.pattern(this.stateRegex), Validators.minLength(2), Validators.maxLength(2)]),
     zipcode: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)])
   });
@@ -250,7 +250,7 @@ export class CheckoutComponent implements OnInit {
   };
 
   get state(){
-    return this.addressGroup.get('city')!
+    return this.addressGroup.get('state')!
   };
 
   get zipcode(){

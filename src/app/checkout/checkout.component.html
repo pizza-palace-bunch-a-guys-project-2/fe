@@ -1,12 +1,10 @@
 
 <app-cart></app-cart>
 
-<h1 *ngIf="!hasOrder">No Order Found</h1>
-<!-- <h1 id="checkoutHeader" *ngIf='hasOrder'>{{}}</h1>  -->
 
-<h1 *ngIf="hasOrder">Get Ready For Pizza!</h1>
+<!-- <h1 id="checkoutHeader" *ngIf='hasOrder'>{{}}</h1>  -->
 <div class="d-flex justify-content-center">
-    <div class="boxclass">
+    <div class="boxclass container">
         <div class="card-body border border-secondary p-0">
             <p>
                 <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
@@ -19,14 +17,15 @@
 
             <div class="collapse show p-3 pt-0" id="collapseExample">
                 <br>
-                <div class="row">
+                <div class="container-fluid align-items-center justify-content-between">
                     <!-- <div class="col-lg-5 mb-lg-0 mb-3"> -->
                       <div *ngFor="let item of items$ | async" class="col-lg-5 mb-lg-0 mb-3">
-                          <p class="mb-0"><span class="fw-bold">List Items Selected Here</span><span class="c-green">:
+                          <p class="mb-0"><span class="fw-bold">Menu Item:</span><span class="c-dark">
                                   {{item.itemName}}</span> </p>
-                          <p class="mb-0"> <span class="fw-bold">Subtotal</span><span class="c-green">{{ item.price | currency }}</span> </p>
-                          <p class="mb-0"> <span class="fw-bold">Quantity</span><span class="c-green">{{ item.qty }}</span> </p>
-                          <p class="mb-0"> <span class="fw-bold">Total</span><span class="c-green">{{ item.price * item.qty | currency }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Price Per Item:</span><span class="c-dark">  {{ item.price | currency }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Quantity: </span><span class="c-dark"> {{ item.qty }}</span> </p>
+                          <p class="mb-0"> <span class="fw-bold">Total:</span><span class="c-dark">{{ item.price * item.qty | currency }}</span> </p>
+                          <br>
                           <!-- <img src="https://media.istockphoto.com/photos/cheesy-pepperoni-pizza-picture-id938742222?k=20&m=938742222&s=612x612&w=0&h=X5AlEERlt4h86X7U7vlGz3bDaDDGQl4C3MuU99u2ZwQ="
                               max-width="30%" height="35%"> -->
                         <!-- NP EDIT DEMO ******** IMAGE TAG ABOVE -->
@@ -43,36 +42,17 @@
 
                     <div>
 
-                        <span id="totalCheck">SubTotal: {{ totalAmount$ | async | currency }}</span>
-                        <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
-                        <br>
-                        <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
-                        <br>
-                        <!-- NP EDIT DEMO *******NEW ADD BELOW -->
-                        <span>Tip:
-                            <input
-                              class="tip"
-                              type="text"
-                              name="tip"
-                              min="0"
-                              max="20"
-                              ng-pattern="onlyNumbers"
-                              value="{{ totalAmountTip$ | async | number: '1.2-2' }}"
-                              (blur)="updateTipAmount($event)">
-                            <!-- try adding ngmask library--works w/ css currency formatting -->
-                        </span>
-                        <br>
-                        <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
-
+                    
+                      <br>  
                       <div>
-                          <p class="h4 mb-0">Summary</p>
-                          <span>SubTotal: {{ totalAmount$ | async | currency }}</span>
+                         <div>
+                          <span class="fw-bold">SubTotal: {{ totalAmount$ | async | currency }}</span>
                           <!-- <span>Tax:{{ totalAmount$ | async | currency }}</span> -->
                           <br>
-                          <span>Tax: {{ totalAmountTax$ | async | currency }}</span>
+                          <span class="fw-bold">Tax: {{ totalAmountTax$ | async | currency }}</span>
                           <br>
                           <!-- NP EDIT DEMO *******NEW ADD BELOW -->
-                          <span>Tip:
+                          <span class="fw-bold">Tip:
                             <input
                               class="tip"
                               type="text"
@@ -83,22 +63,23 @@
                               value="{{ totalAmountTip$ | async | number: '1.2-2' }}"
                               (blur)="updateTipAmount($event)">
                               <!-- try adding ngmask library--works w/ css currency formatting -->
-                          </span>
-                          <br>
+                          </span><br>
+                          <span class="fw-bold">OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
+                          </div>
                           <!-- NP EDIT DEMO *******NEW ADD ABOVE -->
-                          <span>OrderTotal: {{ totalAmountCheckout$ | async | currency }}</span>
+                          
                     </div>
 
-                    <br>
+        
 
-                    <br><br><br>
-                    <div class="col-lg-5">
+                    <br>
+                    <div class="col-lg-9">
                         <label class="d-flex justify-content-center">Enter Payment Details</label><br>
                         <form style="margin-left:2em" [formGroup]="paymentGroup">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form__div"> <input id="cnum" type="text" class="form-control"
-                                            placeholder=" " formControlName='card_number'> <label for="cnum"
+                                            placeholder=" " formControlName='card_number' required> <label for="cnum"
                                             class="form__label text-danger">Card
                                             Number</label>
                                         <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)"
@@ -111,7 +92,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form__div"> <input id="cexpdate" type="text" class="form-control"
-                                            placeholder=" " formControlName='cardexpiration'> <label for="cexpdate"
+                                            placeholder=" " formControlName='cardexpiration' required> <label for="cexpdate"
                                             class="form__label text-danger">Expiration Date
                                             (MM/YY)</label>
                                         <div *ngIf="cardexpiration.invalid && (cardexpiration.dirty || cardexpiration.touched)"
@@ -126,7 +107,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form__div"> <input id="cvv" type="password" class="form-control"
-                                            placeholder=" " formControlName='security_code'> <label for="cvv"
+                                            placeholder=" " formControlName='security_code' required> <label for="cvv"
                                             class="form__label text-danger">CVV
                                             code</label>
                                         <div *ngIf="security_code.invalid && (security_code.dirty || security_code.touched)"
@@ -141,7 +122,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form__div"> <input id="cholder" type="text" class="form-control"
-                                            placeholder=" " formControlName='cardholder'> <label for="cholder"
+                                            placeholder=" " formControlName='cardholder' required> <label for="cholder"
                                             class="form__label text-danger">Cardholder
                                             Name</label>
                                         <div *ngIf="cardholder.invalid && (cardholder.dirty || cardholder.touched)"
@@ -156,7 +137,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form__div"> <input id="billing" type="text" class="form-control"
-                                            placeholder=" " formControlName='billingzip'> <label for="billing"
+                                            placeholder=" " formControlName='billingzip' required> <label for="billing"
                                             class="form__label text-danger">Billing
                                             Zipcode</label>
                                         <div *ngIf="billingzip.invalid && (billingzip.dirty || billingzip.touched)"
@@ -178,7 +159,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form__div"> <input id="sname" type="text" class="form-control"
-                                                placeholder=" " formControlName='street_name'> <label for="sname"
+                                                placeholder=" " formControlName='street_name' required> <label for="sname"
                                                 class="form__label text-danger">Street Name</label>
                                             <div *ngIf="street_name.invalid && (street_name.dirty || street_name.touched)"
                                                 class="alert alert-danger">
@@ -192,7 +173,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form__div"> <input id="city" type="text" class="form-control"
-                                                placeholder=" " formControlName='city'>
+                                                placeholder=" " formControlName='city' required>
                                             <label for="city" class="form__label text-danger">City</label>
                                             <div *ngIf="city.invalid && (city.dirty || city.touched)"
                                                 class="alert alert-danger">
@@ -206,7 +187,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form__div"> <input id="state" type="text" class="form-control"
-                                                placeholder=" " formControlName='state'>
+                                                placeholder=" " formControlName='state' required>
                                             <label for="state" class="form__label text-danger">State
                                                 Abbreviation</label>
                                             <div *ngIf="state.invalid && (state.dirty || state.touched)"
@@ -223,7 +204,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form__div"> <input id="zipcode" type="text" class="form-control"
-                                                placeholder=" " formControlName='zipcode'>
+                                                placeholder=" " formControlName='zipcode' required>
                                             <label for="zipcode" class="form__label text-danger">Zipcode</label>
                                             <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)"
                                                 class="alert alert-danger">
@@ -236,8 +217,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-outline-secondary text-dark w-100"
-                                            (click)="createOrder()">Place
+                                        <button type="submit" class="btn btn-outline-secondary text-dark w-100 mb-4"
+                                            (click)="createOrder()" [disabled]="!addressGroup.valid || !paymentGroup.valid">Place
                                             Order</button>
                                     </div>
                                 </div>
