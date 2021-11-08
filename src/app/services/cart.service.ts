@@ -38,7 +38,7 @@ totalAmountTip$ = new BehaviorSubject<number>(0);
 totalAmountCheckout$: Observable<number>;
 
 
-  constructor(private http: HttpClient) {
+  constructor(/* private http: HttpClient */) {
     // JSON.parse(localStorage.getItem('cartItems'))
     console.warn('Cart Service')
     const itemList = JSON.parse(localStorage.getItem('cartItems')) || [];
