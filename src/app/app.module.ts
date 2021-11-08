@@ -23,6 +23,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { MiniGameComponent } from './mini-game/mini-game.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
+      {path: 'header3', component:Header3Component},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard]},
