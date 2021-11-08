@@ -13,6 +13,9 @@
             <a class="nav-link" *ngIf="!currentRoute('checkout')" routerLink="checkout">Checkout</a>
           </li>
           <li class="nav-item">
+            <app-edit-user></app-edit-user>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" (click)="preventBackButton()" routerLink="login">Log out</a>
           </li>
         </ul>

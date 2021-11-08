@@ -31,19 +31,10 @@ export class LoginComponent implements OnInit{
 
 
   loginUser( ) {
-    if( this.name.value) {
-      console.log('Form input field username has value: ',  this.name.value);
-    }
-
-    if(this.password.value) {
-      console.log('Form input field password has value: ', this.password.value);
-    }
-
     const user = new User(this.name.value, this.password.value);
 
     this.userServ.loginUser(user).subscribe(
       resp => {
-        console.log("Response: ", resp);
         const logUser = new User(resp["userName"],
           resp["userPassword"],
           resp["userEmail"],
