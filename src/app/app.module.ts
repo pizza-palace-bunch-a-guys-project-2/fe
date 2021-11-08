@@ -51,9 +51,9 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     RouterModule.forRoot([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'checkout', component: CheckoutComponent},
+      {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard]},
       // {path: 'cart', component: CartComponent}, // keep for now demo then place in menu route once merged and use as modal
-      {path: 'menu', component: MenuComponent},
+      {path: 'menu', component: MenuComponent, canActivate:[AuthGuard]},
       {path: '**', redirectTo: 'login'}
     ]),
     NgbModule,
@@ -63,3 +63,4 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

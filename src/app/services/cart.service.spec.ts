@@ -1,37 +1,70 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, inject, async } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CartService } from './cart.service';
+import { Item } from '../menu-item/Iitem';
 
 
-describe('PokeService', () => {
-  let service: CartService;
+const fakeMenuItem = {
+  itemName: 'Pepperoni',
+  price: 13
+}
 
 
-  beforeEach(() => {
+describe('CartService', () => {
+  let cartService: CartService;
+  let mockStream: jasmine.SpyObj<CartService>;
+  let fakeMenuItem: any;
 
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CartService]
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        providers: [CartService]
+      });
+
+      cartService = TestBed.inject(CartService);
+      // cartService = jasmine.createSpy('CartService');
+      });
+
+
+
+    it('should be created', () => {
+      expect(cartService).toBeTruthy();
+    });
+
+    it('#clear should remove all items,', () => {
+      expect(cartService.clear()).toEqual();
     });
 
 
-    service = TestBed.inject(CartService);
+    // it('#addItem should add item to the cart', () => {
+    //   (done: DoneFn) => {
+    //     cartService.addItem(fakeMenuItem).subscribe(value => {
+    //       expect(value).toBe('pepperoni', 13);
+    //       done();
+    //     })
+    //   }
+    // })
 
-  });
-
-  afterEach(() => {
-
-  })
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-
-//   it('should have addItem()', () => {
-//     service.addItem(item)
-// });
+    it('#addItem adds an item to the cart', (inject( [CartService], async (cartService) => {
+      await cartService.addItem().subscribe(result => expect(result.length).toBeGreaterThanOrEqual(0));
+    })));
 
 
 
-})
+    it('#isCartEmpty to be empty', () => {
+      expect(cartService.isCartEmpty()).toBeFalsy;
+    })
+
+
+    afterEach(() => {
+
+    })
+
+});
+
+
+
+
+
+
+
