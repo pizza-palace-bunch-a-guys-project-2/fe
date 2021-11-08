@@ -16,11 +16,11 @@ export class NavbarComponent implements OnInit {
   }
 
   preventBackButton() {
-    this.userServ.logout();
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-        window.history.pushState(null, "", window.location.href);
-    };
+    this.userServ.setUserToDefault();
+    history.pushState(null, null, 'no-back-button');
+    window.addEventListener('popstate', function(event) {
+      history.pushState(null, null, 'no-back-button');
+    });
   }
 
   currentRoute(string){
