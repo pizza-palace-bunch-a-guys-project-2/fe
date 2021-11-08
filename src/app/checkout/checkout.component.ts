@@ -80,8 +80,8 @@ export class CheckoutComponent implements OnInit {
     this.totalAmountCheckout$ = cartService.totalAmountCheckout$;
     
     // NP EDIT DEMO ABOVE EVERYTHING CONSTRUCTOR
-    console.log(this.totalAmountTip$)
-    console.log(this.totalAmountCheckout$);
+    //console.log(this.totalAmountTip$)
+    //console.log(this.totalAmountCheckout$);
 
 
   }
@@ -108,7 +108,7 @@ export class CheckoutComponent implements OnInit {
         take(1),
       ).subscribe(
         (data: any) => {
-          console.log(data);
+          //console.log(data);
           this.totalOrder = data;
           resolve(data);
         })
@@ -126,7 +126,7 @@ export class CheckoutComponent implements OnInit {
    for(let i = 0; i<itemArray.length; i++){
      this.itemString += itemArray[i].itemName + ", "
    }
-   console.log(this.itemString);
+   //console.log(this.itemString);
    return this.itemString;
    
   };
@@ -155,7 +155,7 @@ export class CheckoutComponent implements OnInit {
       this.totalOrder,
       this.userId
       )
-    console.log(order);
+    //console.log(order);
 
     this.submitOrder(order);
     this.clearForms();
@@ -170,7 +170,7 @@ export class CheckoutComponent implements OnInit {
     let stringOrder = JSON.stringify(order);
     this.cServ.insertOrder(stringOrder).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
 
         this.cartService.clear();
       },
@@ -194,7 +194,7 @@ export class CheckoutComponent implements OnInit {
     this.paymentDetails += this.security_code.value + ', ';
     this.paymentDetails += this.billingzip.value;
     
-    console.log(this.paymentDetails);
+    //console.log(this.paymentDetails);
 
     return this.paymentDetails;
 
@@ -208,7 +208,7 @@ export class CheckoutComponent implements OnInit {
     this.address += this.state.value + ', ';
     this.address += this.zipcode.value;
 
-    console.log(this.address);
+    //console.log(this.address);
 
     return this.address;
   }
