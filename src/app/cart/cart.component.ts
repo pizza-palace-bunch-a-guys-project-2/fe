@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   items$: Observable<MenuItem[]>;
 
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, public cartService: CartService) {
+  constructor(private modalService: NgbModal, /* private formBuilder: FormBuilder */ public cartService: CartService) {
     /*
     const sub = this.cartService.cartItems.subscribe((data: any) => {
       console.warn('Data', data)
