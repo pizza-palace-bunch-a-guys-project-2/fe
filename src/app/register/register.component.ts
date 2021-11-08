@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
 
     this.userServ.signUpUser(user).subscribe(
       resp => {
-        console.log("Response: ", resp);
         this.isInvalidUsername = false;
         this.isLoading = false;
         this.router.navigate(['/login']);
