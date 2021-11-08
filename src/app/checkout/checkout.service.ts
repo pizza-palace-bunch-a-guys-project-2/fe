@@ -8,7 +8,8 @@ import { Order } from './order';
 })
 
 export class CheckoutService {
-private urlBase = "http://localhost:9015/checkout/orderplaced";
+// private urlBase = "http://localhost:9015/checkout/orderplaced";
+private urlBase = "http://ec2-18-116-241-177.us-east-2.compute.amazonaws.com:9015/checkout/orderplaced";
 
   constructor(private http: HttpClient) { }
 
