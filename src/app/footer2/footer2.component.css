@@ -1,6 +1,6 @@
 #div2{
     height:150px;
-    width:550px;
+    width:500px;
     
     float:left;
     margin-left:20px;
@@ -15,4 +15,12 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 10px;
+}
+
+.map1
+{
+    margin-left:75%;
+    position:absolute;
+  
+
 }

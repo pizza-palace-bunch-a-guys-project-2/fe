@@ -11,14 +11,22 @@
     margin-top: -10px; 
     margin-left:0px;
   
-    color:black;
+    color:rgb(240, 155, 28);
     
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        
+        font-size: 100px;
     }
+
+
     .title1{
         position:absolute;
-        font-size: 100px;
-        left:35%;
+        font-size: 25px;
+        left:40%;
+        font-family:'Lucida Sans';
+        font-weight: bold;
     }
 
     #im1{
@@ -39,10 +47,22 @@
         
         
     }
+   
+    .cartico
+    {
+        position:absolute;
+        background-image:url('./FoodImage.jpg');
+        background-size:contain;
+        width:40px;
+        height:50px;
+        background-repeat: no-repeat;
+        z-index:1;
 
+        left:25%;
+    }
     .mendiv{
        
-       top:50px;
+       top:80px;
        font-size:20px;
        position:absolute;
        left:55%;

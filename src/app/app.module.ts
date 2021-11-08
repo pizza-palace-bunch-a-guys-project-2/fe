@@ -20,6 +20,7 @@ import {Header3Component } from './header3/header3.component';
 import {Footer2Component} from './footer2/footer2.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { AllitemsComponent } from './allitems/allitems.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthGuard } from './services/auth-guard.service';
     RegisterComponent,
     Header3Component,
     Footer2Component,
-    LoadingComponent
+    LoadingComponent,
+    AllitemsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { AuthGuard } from './services/auth-guard.service';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
+      {path: 'header3', component:Header3Component},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard]},
