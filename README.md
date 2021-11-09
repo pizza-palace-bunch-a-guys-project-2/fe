@@ -8,6 +8,7 @@ Pizza Palace is a Single Page Application designed to facilitate online pizza or
 * CSS version 3
 * JavaScript version ECMAScript 2018
 * Angular version 12
+* AWS S3
 
 ## Features
 List of features ready:
