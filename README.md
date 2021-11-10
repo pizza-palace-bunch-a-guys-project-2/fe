@@ -7,6 +7,7 @@ Pizza Palace is a Single Page Application designed to facilitate online pizza or
 * HTML version 5
 * CSS version 3
 * JavaScript version ECMAScript 2018
+* TypeScript version 4.4.4
 * Angular version 12
 * AWS S3
 
@@ -24,10 +25,11 @@ List of features ready:
 * Users are having all necessary links and location information in the application footer.
 
 ## Getting Started
-
+1. Make sure do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use EC2 project endpoint .
 
 ## Usage
-[The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.
+[The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.\
+After installing and runnig project you can check it at `http://localhost:4200/`.
 
 ## Contributors
 * Iaroslav Mokroguz
