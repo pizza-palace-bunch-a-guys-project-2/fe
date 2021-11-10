@@ -25,7 +25,7 @@ List of features ready:
 * Users are having all necessary links and location information in the application footer.
 
 ## Getting Started
-1. Make sure do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use EC2 project endpoint .
+1. Make sure do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use EC2 project endpoints: `http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015` .
 
 ## Usage
 [The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.\
