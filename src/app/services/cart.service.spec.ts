@@ -45,9 +45,9 @@ describe('CartService', () => {
     //   }
     // })
 
-    it('#addItem adds an item to the cart', (inject( [CartService], async (cartService) => {
-      await cartService.addItem().subscribe(result => expect(result.length).toBeGreaterThanOrEqual(0));
-    })));
+    // it('#addItem adds an item to the cart', (inject( [CartService], async (cartService) => {
+    //   await cartService.addItem().subscribe(result => expect(result.length).toBeGreaterThanOrEqual(0));
+    // })));
 
 
 
