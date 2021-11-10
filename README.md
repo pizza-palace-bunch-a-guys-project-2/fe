@@ -26,17 +26,21 @@ List of features ready:
 
 ## Getting Started
 1. Make sure do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use EC2 project endpoints: `http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015` .
+2. To upload this project you need to clone this repository using `git clone https://github.com/pizza-palace-bunch-a-guys-project-2/fe.git`.
+3. Add project to your IDE.
+4. In your IDE project folder run `npm i` command.
+5. 
 
 ## Usage
 [The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.\
 After installing and runnig project you can check it at `http://localhost:4200/`.
 
 ## Contributors
-* Iaroslav Mokroguz
-* James Jamison
-* MJ Jadeja
-* Eury Kim
-* Nick Parsley
-* Ray Roman
+* [Iaroslav Mokroguz](https://github.com/maustrauk)
+* [James Jamison](https://github.com/Vapidjimbo)
+* [MJ Jadeja](https://github.com/MJad98)
+* [Eury Kim](https://github.com/EuryKim2)
+* [Nick Parsley](https://github.com/nparsley)
+* [Ray Roman](https://github.com/rainwater475)
 ## License
 MIT License
