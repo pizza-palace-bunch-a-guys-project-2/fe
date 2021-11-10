@@ -21,7 +21,7 @@ To-do list:
 
 ## Usage
 
-
+## Contributors
 
 ## License
 MIT License
