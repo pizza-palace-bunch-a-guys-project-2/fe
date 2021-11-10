@@ -25,7 +25,7 @@ List of features ready:
 * Users are having all necessary links and location information in the application footer.
 
 ## Getting Started
-1. Make sure to do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use EC2 project endpoints: `http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015`.
+1. Make sure to do download and install [back-end](https://github.com/pizza-palace-bunch-a-guys-project-2/be) or use [EC2 project](http://ec2-18-116-241-177.us-east-2.compute.amazonaws.com:9015/swagger-ui.html) endpoints.
 2. Make sure you have installed NodeJS and Angular on your machine.
 3. To upload this project you need to clone this repository using `git clone https://github.com/pizza-palace-bunch-a-guys-project-2/fe.git`.
 4. Add project to your IDE.
