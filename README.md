@@ -21,11 +21,13 @@ List of features ready:
 * Users are able to edit their profile information.
 * Users are able to checkout with their orders by inserting their payment information with front end validation.
 * Users are getting confirmation  HTML email after payment confirmation.
+* Users are having all necessary links and location information in the application footer.
 
 ## Getting Started
 
 
 ## Usage
+[The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.
 
 ## Contributors
 * Iaroslav Mokroguz
