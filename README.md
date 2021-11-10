@@ -31,7 +31,7 @@ List of features ready:
 4. Add project to your IDE.
 5. In your IDE project folder run `npm i` command.
 6. In your IDE project folder run `ng serve` command.
-7. If you want to use an EC2 server instead of a local server, you need to make these changes:
+7. If you want to use an EC2 server instead of your local server, you need to make these changes:
    * At `user.service.ts` file change `private url = "http://localhost:9015/users";` to `private url = "http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/users";`
    * At `item.service.ts` file change `private urlBase = "http://localhost:9015/items";` to ` private urlBase = "http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/items";`
    * At `checkout.service.ts` file change `private urlBase = "http://localhost:9015/checkout/orderplaced";` to `private urlBase = "http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/checkout/orderplaced";`
