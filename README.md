@@ -12,8 +12,12 @@ Pizza Palace is a Single Page Application designed to facilitate online pizza or
 
 ## Features
 List of features ready:
-
-To-do list:
+* Users are able to log in.
+* Users are able to sign up with front end validation of user personal information.
+* Users are able to play mario mini-game on log in page.
+* Users are able to select the pizza menu and other products after login in application.
+* Users are able to check their carts for their products.
+* Users are able to checkout with their orders by inserting their payment information.
 
 
 ## Getting Started
@@ -22,6 +26,11 @@ To-do list:
 ## Usage
 
 ## Contributors
-
+* Iaroslav Mokroguz
+* James Jamison
+* MJ Jadeja
+* Eury Kim
+* Nick Parsley
+* Ray Roman
 ## License
 MIT License
