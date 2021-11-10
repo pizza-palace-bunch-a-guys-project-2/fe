@@ -35,6 +35,7 @@ List of features ready:
 ## Usage
 [The current project](http://menuitembucket.s3-website.us-east-2.amazonaws.com/) is running on the AWS S3 service.\
 After installing and runnig project you can check it at `http://localhost:4200/`.
+![Application welcome screen screenshot](/readme_pic_1.jpg?raw=true)
 
 ## Contributors
 * [Iaroslav Mokroguz](https://github.com/maustrauk)
