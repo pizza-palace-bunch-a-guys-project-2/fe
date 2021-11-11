@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>c documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">c documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="pizza-palace">Pizza Palace</h1>
+<h2 id="project-description">Project Description</h2>
+<p>Pizza Palace is a Single Page Application designed to facilitate online pizza ordering. The first thing you&#39;ll see upon entering this SPA is a secure login portal, accompanied by a streamlined form for new users to utilize for account creation (with a confirmation email included upon completion of the form). Following successful login the user is taken to the menu, where they are greeted with an interactive set of items to build their ideal pizza-based meal. Users can view their selections in the cart, which conveniently pops out when a user clicks it&#39;s icon. When all is said and done and the User is happy with their order they can move to the checkout form asking for details to complete their order. After submitting the form the User will receive a confirmation email with their order information included inside.</p>
+<h2 id="technologies-used">Technologies Used</h2>
+<ul>
+<li>HTML version 5</li>
+<li>CSS version 3</li>
+<li>JavaScript version ECMAScript 2018</li>
+<li>TypeScript version 4.4.4</li>
+<li>Angular version 12</li>
+<li>AWS S3</li>
+</ul>
+<h2 id="features">Features</h2>
+<p>List of features ready:</p>
+<ul>
+<li>Users are able to log in.</li>
+<li>Users are able to sign up with front end validation of user personal information.</li>
+<li>Users are getting confirmation HTML email when they successfully sign up or edit their personal information.</li>
+<li>Users are able to play mario mini-game on log in page.</li>
+<li>Users are able to select the &quot;pizza menu&quot; and other products after login in application.</li>
+<li>Users are able to check their carts for their products.</li>
+<li>Users are able to edit their profile information.</li>
+<li>Users are able to checkout with their orders by inserting their payment information with front end validation.</li>
+<li>Users are getting confirmation  HTML email after payment confirmation.</li>
+<li>Users are having all necessary links and location information in the application footer.</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<ol>
+<li>Make sure to do download and install <a href="https://github.com/pizza-palace-bunch-a-guys-project-2/be">back-end</a> or use <a href="http://ec2-18-116-241-177.us-east-2.compute.amazonaws.com:9015/swagger-ui.html">EC2 project</a> endpoints.</li>
+<li>Make sure you have installed NodeJS and Angular on your machine.</li>
+<li>To upload this project you need to clone this repository using <code>git clone https://github.com/pizza-palace-bunch-a-guys-project-2/fe.git</code>.</li>
+<li>Add project to your IDE.</li>
+<li>In your IDE project folder run <code>npm i</code> command.</li>
+<li>In your IDE project folder run <code>ng serve</code> command.</li>
+<li>If you want to use an EC2 server instead of your local server, you need to make these changes:<ul>
+<li>At <code>user.service.ts</code> file change <code>private url = &quot;http://localhost:9015/users&quot;;</code> to <code>private url = &quot;http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/users&quot;;</code></li>
+<li>At <code>item.service.ts</code> file change <code>private urlBase = &quot;http://localhost:9015/items&quot;;</code> to <code> private urlBase = &quot;http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/items&quot;;</code></li>
+<li>At <code>checkout.service.ts</code> file change <code>private urlBase = &quot;http://localhost:9015/checkout/orderplaced&quot;;</code> to <code>private urlBase = &quot;http://ec2-18-116-241-177.us-east-compute.amazonaws.com:9015/checkout/orderplaced&quot;;</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="usage">Usage</h2>
+<p><a href="http://menuitembucket.s3-website.us-east-2.amazonaws.com/">The current project</a> is running on the AWS S3 service.<br>After installing and runnig project you can check it at <code>http://localhost:4200/</code>.
+<img src="/readme_pic_1.jpg?raw=true" alt="Application welcome screen screenshot" class="img-responsive"></p>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li><a href="https://github.com/maustrauk">Iaroslav Mokroguz</a></li>
+<li><a href="https://github.com/Vapidjimbo">James Jamison</a></li>
+<li><a href="https://github.com/MJad98">MJ Jadeja</a></li>
+<li><a href="https://github.com/EuryKim2">Eury Kim</a></li>
+<li><a href="https://github.com/nparsley">Nick Parsley</a></li>
+<li><a href="https://github.com/rainwater475">Ray Roman</a></li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT License</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
